@@ -1,0 +1,7 @@
+node_modules
+.env
+/node_modules
+/src/recovers
+/src/recovers/*
+/public/uploads/videos/posts/*
+/public/uploads/images/posts/*
