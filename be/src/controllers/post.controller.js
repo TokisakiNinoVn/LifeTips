@@ -11,11 +11,10 @@ const { getPostFiles, getUserById, getPostCategories } = require('../helper/post
 exports.create = async (req, res, next) => {
     const { title, content, listCategoryId, isPrivate } = req.body;
     const userId = req.user.id;
-
     try {
         let createPostQuery;
         if (isPrivate === 1 || isPrivate === '1') { 
-            createPostQuery = `
+            createPostQuery = ` 
                 INSERT INTO tips_post (user_id, title, content, created_at, updated_at, is_private)
                 VALUES (?, ?, ?, NOW(), NOW(), 1)
             `;

@@ -61,7 +61,7 @@ exports.unSavePost = async (req, res, next) => {
       data: []
     });
   } catch (error) {
-      return next(new AppError(HTTP_STATUS.INTERNAL_SERVER_ERROR, 'fail', error.message, []), req, res, next);
+      return next(new AppError(HTTP_STATUS.INTERNAL_SERVER_ERROR, 'fail', error.message, []), req, res, next); 
   }
 };
 

@@ -2,6 +2,36 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
+exports.loginRequired = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  // console.log('--- Middleware Debug ---');
+  // console.log('Authorization Header:', authHeader);
+
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ message: 'Không có token hoặc token không hợp lệ' });
+  }
+
+  const jwtSecret = process.env.JWT_SECRET_KEY;
+  let token = authHeader.split(' ')[1].replace(/^"|"$/g, '');
+
+  if (!token) {
+    return res.status(401).json({ message: 'Token rỗng sau tách' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, jwtSecret);
+    // console.log('Decoded token:', decoded);
+    if (!decoded.id) {
+      return res.status(400).json({ message: 'Token không chứa user id' });
+    }
+    req.user = decoded;
+    next();
+  } catch (err) {
+    console.error('JWT Verify Error:', err);
+    return res.status(400).json({ code: 400, status: 'JsonWebTokenError', message: err.message });
+  }
+};
+
 // Middleware xác thực quyền truy cập dựa trên vai trò
 exports.authorizeRole = (role) => {
   return (req, res, next) => {
@@ -72,34 +102,3 @@ exports.authenticate = (req, res, next) => {
 //   });
 // };
 
-exports.loginRequired = (req, res, next) => {
-  if (req.session && req.session.user) {
-    return next();
-  }
-
-  const authHeader = req.headers.authorization;
-  const jwtSecret = process.env.JWT_SECRET_KEY;
-  // console.log("JWT Secret:", jwtSecret);
-
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Không có token trong header hoặc token không hợp lệ' });
-  }
-
-  // Lấy token và loại bỏ dấu ngoặc kép nếu có
-  let token = authHeader.split(' ')[1];
-  token = token.replace(/^"|"$/g, ''); // Loại bỏ dấu `"` ở đầu và cuối token
-  // console.log("Token:", token);
-
-  if (!token) {
-    return res.status(401).json({ message: 'line 58: Login required' });
-  }
-
-  try {
-    const decoded = jwt.verify(token, jwtSecret);
-    req.user = decoded;
-    next();
-  } catch (err) {
-    console.error(err);
-    return res.status(400).json({ code: 400, status: 'JsonWebTokenError', message: err.message });
-  }
-};

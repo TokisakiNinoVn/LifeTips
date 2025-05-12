@@ -75,7 +75,7 @@ exports.uploadPostFile = async (req, res, next) => {
                 );
 
                 files.push({ url, type });
-            }
+            } 
 
             return res.status(HTTP_STATUS.OK).json({
                 data: files
@@ -91,7 +91,7 @@ exports.upload3dImage = async (req, res, next) => {
     upload(req, res, async (err) => { 
         try {
             if (!req.files || req.files.length === 0) {
-                // return next(new AppError(HTTP_STATUS.BAD_REQUEST, 'No files uploaded', 'You must upload at least one file.'));
+                // return next(new AppError(HTTP_STATUS.BAD_REQUEST, 'No files uploaded', 'You must upload at least one file.')); 
                 return res.status(HTTP_STATUS.OK).json({
                     data: []
                 });
