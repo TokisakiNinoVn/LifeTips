@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+
+<VBox
+        xmlns:fx="http://javafx.com/fxml"
+        stylesheets="@../css/profile.css"
+        spacing="20"
+        fx:controller="com.example.ui.controller.ProfileController"
+        prefWidth="1200"
+        prefHeight="800"
+        styleClass="profile-page">
+    <fx:include source="../fxml/components/header_component.fxml" fx:id="header"/>
+
+    <HBox alignment="CENTER" spacing="20" styleClass="profile-section">
+        <ImageView fitWidth="100" fitHeight="100" preserveRatio="true" styleClass="profile-image">
+            <Image url="@../assets/images/img.png"/>
+        </ImageView>
+        <VBox spacing="10">
+            <Label text="Phan Minh Hieu" styleClass="profile-name"/>
+            <Label text="Sharing tips about technology and productivity. Always learning, always growing." styleClass="profile-bio" wrapText="true"/>
+            <HBox spacing="10">
+                <Button text="Follow" styleClass="follow-button"/>
+                <Button text="..." styleClass="more-button"/>
+            </HBox>
+        </VBox>
+    </HBox>
+
+    <!-- Stats -->
+    <HBox alignment="CENTER" spacing="50" styleClass="profile-stats">
+        <VBox alignment="CENTER">
+            <Label text="124" styleClass="stat-value"/>
+            <Label text="Tips" styleClass="stat-label"/>
+        </VBox>
+        <VBox alignment="CENTER">
+            <Label text="1.2K" styleClass="stat-value"/>
+            <Label text="Followers" styleClass="stat-label"/>
+        </VBox>
+        <VBox alignment="CENTER">
+            <Label text="890" styleClass="stat-value"/>
+            <Label text="Following" styleClass="stat-label"/>
+        </VBox>
+    </HBox>
+
+    <!-- Tabs -->
+    <TabPane styleClass="profile-tabs">
+        <tabs>
+            <Tab text="My Tips" closable="false"/>
+            <Tab text="Saved" closable="false"/>
+        </tabs>
+    </TabPane>
+
+    <!-- Content Area (Posts) -->
+    <HBox alignment="CENTER" spacing="20" styleClass="content-area">
+        <!-- Post 1 -->
+        <VBox spacing="10" styleClass="post-card">
+            <Label text="Productivity" styleClass="post-category"/>
+            <Label text="Effective Time Management" styleClass="post-title"/>
+            <Label text="Master your daily schedule with these proven techniques..." styleClass="post-excerpt" wrapText="true"/>
+            <Label text="By John Doe" styleClass="post-author"/>
+            <HBox spacing="10">
+                <Label text="56" styleClass="post-likes"/>
+                <Label text="23" styleClass="post-comments"/>
+            </HBox>
+        </VBox>
+
+        <!-- Post 2 -->
+        <VBox spacing="10" styleClass="post-card">
+            <Label text="Health" styleClass="post-category"/>
+            <Label text="Healthy Meal Prep Guide" styleClass="post-title"/>
+            <Label text="Save time and eat healthy with this meal prep strategy..." styleClass="post-excerpt" wrapText="true"/>
+            <Label text="By John Doe" styleClass="post-author"/>
+            <HBox spacing="10">
+                <Label text="78" styleClass="post-likes"/>
+                <Label text="12" styleClass="post-comments"/>
+            </HBox>
+        </VBox>
+    </HBox>
+</VBox>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane fx:controller="controller.HomeController"
+            xmlns:fx="http://javafx.com/fxml" prefWidth="1200" prefHeight="800">
+
+    <!-- Header -->
+    <top>
+        <HBox spacing="20" padding="15" styleClass="header">
+            <Label text="LifeTips" styleClass="logo"/>
+            <TextField fx:id="searchField" promptText="Search tips..." prefWidth="300"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <HBox spacing="15" alignment="CENTER_RIGHT">
+                <Label text="🏠"/>
+                <Label text="➕"/>
+                <Label text="🔔"/>
+                <Label text="👤"/>
+            </HBox>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="20" padding="20">
+            <!-- Categories -->
+            <FlowPane hgap="10" vgap="10">
+                <Button text="All"/>
+                <Button text="Cooking"/>
+                <Button text="Health"/>
+                <Button text="Study"/>
+                <Button text="Family"/>
+                <Button text="Work"/>
+                <Button text="Technology"/>
+            </FlowPane>
+
+            <!-- Cards -->
+            <HBox spacing="20">
+                <VBox spacing="10" styleClass="tip-card">
+                    <Label text="Study" styleClass="tip-category"/>
+                    <Label text="5 Essential Study Techniques" styleClass="tip-title"/>
+                    <Label text="Improve your learning efficiency with these proven methods..." wrapText="true"/>
+                    <Label text="By Sarah Johnson" styleClass="tip-author"/>
+                    <HBox spacing="10">
+                        <Label text="❤️ 24"/>
+                        <Label text="💬 5"/>
+                        <Label text="🔗"/>
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="10" styleClass="tip-card">
+                    <Label text="Cooking" styleClass="tip-category"/>
+                    <Label text="Quick and Healthy Breakfast Ideas" styleClass="tip-title"/>
+                    <Label text="Start your day right with these nutritious recipes..." wrapText="true"/>
+                    <Label text="By Mike Chen" styleClass="tip-author"/>
+                    <HBox spacing="10">
+                        <Label text="❤️ 42"/>
+                        <Label text="💬 8"/>
+                        <Label text="🔗"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+
+    <!-- Footer -->
+    <bottom>
+        <HBox spacing="20" padding="15" alignment="CENTER_LEFT" styleClass="footer">
+            <Label text="LifeTips" styleClass="logo"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <VBox spacing="5">
+                <Label text="Email: contact@lifetips.com"/>
+                <Label text="Phone: +84 123 456 789"/>
+            </VBox>
+        </HBox>
+    </bottom>
+</BorderPane>
