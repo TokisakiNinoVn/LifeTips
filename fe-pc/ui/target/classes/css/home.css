@@ -1,10 +1,7 @@
 .header {
     -fx-background-color: white;
     -fx-border-color: #e0e0e0;
-}
-
-.footer {
-    -fx-background-color: #f5f5f5;
+    -fx-padding: 15px;
 }
 
 .logo {
@@ -36,4 +33,9 @@
 .tip-author {
     -fx-text-fill: gray;
     -fx-font-size: 12px;
+}
+
+.main-content {
+    -fx-padding: 20;
+    -fx-background-color: #f5f5f5;
 }
