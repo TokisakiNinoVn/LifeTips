@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_home" android:title="Home" android:icon="@drawable/ic_home" />
+    <item android:id="@+id/nav_explore" android:title="Explore" android:icon="@drawable/ic_explore" />
+    <item android:id="@+id/nav_add" android:title="Add" android:icon="@drawable/ic_add" />
+    <item android:id="@+id/nav_saved" android:title="Đã lưu" android:icon="@drawable/ic_bookmark" />
+    <item android:id="@+id/nav_profile" android:title="Cá nhân" android:icon="@drawable/ic_account" />
+</menu>
