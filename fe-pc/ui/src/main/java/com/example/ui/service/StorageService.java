@@ -7,21 +7,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Dịch vụ lưu trữ token và trạng thái đăng nhập vào file JSON cục bộ trong thư mục dự án.
+ * Dịch vụ lưu trữ token và trạng thái đăng nhập vào file JSON cục bộ trong thư
+ * mục dự án.
  */
-public class TokenStorageService {
+public class StorageService {
     private static final Gson gson = new Gson();
     private static final String FILE_PATH = "localStorage.json";
 
     // Đảm bảo file tồn tại
     private static void ensureFileExists() {
         File file = new File(FILE_PATH);
-        System.out.println("Token file path: " + file.getAbsolutePath());
+        // System.out.println("Token file path: " + file.getAbsolutePath());
 
         try {
             if (!file.exists()) {
                 boolean created = file.createNewFile();
-                System.out.println("Created token file: " + created);
+                // System.out.println("Created token file: " + created);
 
                 Map<String, String> empty = new HashMap<>();
                 empty.put("token", "");
@@ -68,14 +69,14 @@ public class TokenStorageService {
         Map<String, String> data = readData();
         data.put("token", token);
         writeData(data);
-        System.out.println("Token saved: " + token);
+        // System.out.println("Token saved: " + token);
     }
 
     // Lấy token
     public static String getToken() {
         Map<String, String> data = readData();
         String token = data.getOrDefault("token", "");
-        System.out.println("Token loaded: " + token);
+        // System.out.println("Token loaded: " + token);
         return token;
     }
 
@@ -92,15 +93,22 @@ public class TokenStorageService {
         Map<String, String> data = readData();
         data.put("loginStatus", status);
         writeData(data);
-        System.out.println("Login status saved: " + status);
+        // System.out.println("Login status saved: " + status);
     }
 
     // Lấy trạng thái đăng nhập
     public static String getStatusLogin() {
         Map<String, String> data = readData();
         String status = data.getOrDefault("loginStatus", "false");
-        System.out.println("Login status loaded: " + status);
+        // System.out.println("Login status loaded: " + status);
         return status;
+    }
+
+    // hàm này sẽ được gọi khi người dùng đăng xuất
+    public static void logout() {
+        clearToken();
+        setStatusLogin("false");
+        System.out.println("User logged out.");
     }
 
     // Test nhanh

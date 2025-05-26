@@ -15,8 +15,11 @@ package utils;
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import java.io.IOException;
+import java.net.URL;
 import java.util.AbstractMap;
 import java.util.HashMap;
+
+import com.example.ui.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -206,6 +209,39 @@ public final class FXRouter {
     /** Helper method of goTo() which load and show new scene
      * @throws Exception: throw FXMLLoader exception if file is not loaded correctly
      */
+//    private static void loadNewRoute(RouteScene route) throws IOException {
+//        // get Main Class package name to get correct files path
+//        String pathRef = mainRef.getClass().getPackage().getName();
+//
+//        // set FXRouter current route reference
+//        currentRoute = route;
+//
+//        // create correct file path.  "/" doesn't affect any OS
+//        String scenePath = "/" + pathRef + "/" + route.scenePath;
+//
+//        // load .fxml resource
+////        Parent resource = FXMLLoader.load(new Object() { }.getClass().getResource(scenePath));
+//        System.out.println("Loading FXML path: " + scenePath);
+////        URL resourceUrl = FXRouter.class.getResource(scenePath);
+////        URL resourceUrl = Main.class.getResource(scenePath); // Main.class nằm ở com.example.ui
+//        URL resourceUrl = FXRouter.class.getClassLoader().getResource(scenePath.substring(1)); // bỏ dấu '/' đầu
+//
+//        if (resourceUrl == null) {
+//            throw new RuntimeException("Không tìm thấy file FXML: " + scenePath);
+//        }
+//        Parent resource = FXMLLoader.load(resourceUrl);
+//
+//
+//        // set window title from route settings or default setting
+//        window.setTitle(route.windowTitle);
+//        // set new route scene
+//        window.setScene(new Scene(resource, route.sceneWidth, route.sceneHeight));
+//        // show the window
+//        window.show();
+//
+//        // set scene animation
+//        routeAnimation(resource);
+//    }
     private static void loadNewRoute(RouteScene route) throws IOException {
         // get Main Class package name to get correct files path
         String pathRef = mainRef.getClass().getPackage().getName();
@@ -213,22 +249,34 @@ public final class FXRouter {
         // set FXRouter current route reference
         currentRoute = route;
 
-        // create correct file path.  "/" doesn't affect any OS
-        String scenePath = "/" + pathRef + "/" + route.scenePath;
+        // create correct file path
+        String scenePath = route.scenePath; // giữ nguyên để dễ xử lý
+        String cleanScenePath = scenePath.startsWith("/") ? scenePath.substring(1) : scenePath;
 
-        // load .fxml resource
-        Parent resource = FXMLLoader.load(new Object() { }.getClass().getResource(scenePath));
+        // debug info
+//        System.out.println("Raw scenePath: " + scenePath);
+//        System.out.println("Clean scenePath: " + cleanScenePath);
+
+        // try loading resource
+        URL resourceUrl = FXRouter.class.getResource("/" + cleanScenePath);
+//        URL resourceUrl = FXRouter.class.getClassLoader().getResource(cleanScenePath);
+//        System.out.println("Resource URL: " + resourceUrl);
+
+        if (resourceUrl == null) {
+            throw new RuntimeException("Không tìm thấy file FXML: " + scenePath);
+        }
+
+        Parent resource = FXMLLoader.load(resourceUrl);
 
         // set window title from route settings or default setting
         window.setTitle(route.windowTitle);
-        // set new route scene
         window.setScene(new Scene(resource, route.sceneWidth, route.sceneHeight));
-        // show the window
         window.show();
 
-        // set scene animation
         routeAnimation(resource);
     }
+
+
 
     /* Syntactic sugar for goTo() method when FXRouter get set */
     public static void startFrom(String routeLabel) throws Exception {

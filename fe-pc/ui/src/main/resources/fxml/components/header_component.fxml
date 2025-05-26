@@ -17,7 +17,7 @@
             <Label text="Home" />
         </HBox>
 
-        <HBox fx:id="addPostLabel" spacing="5" alignment="CENTER">
+        <HBox fx:id="addPostLabel" spacing="5" alignment="CENTER" onMouseClicked="#handleAddPost">
             <FontIcon iconLiteral="mdi-plus-circle-outline" iconSize="24" />
             <Label text="New Post" />
         </HBox>
@@ -37,6 +37,11 @@
             <Label text="Alerts" />
         </HBox>
 
+        <!-- Nút đăng xuất -->
+        <HBox fx:id="logout" onMouseClicked="#handleLogout" spacing="5" alignment="CENTER">
+            <FontIcon iconLiteral="mdi-logout" iconSize="24" />
+            <Label text="Logout" />
+        </HBox>
         <ImageView fx:id="profileImage" fitHeight="32" fitWidth="32" onMouseClicked="#navigateToProfile" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../assets/images/img.png" />
         </ImageView>

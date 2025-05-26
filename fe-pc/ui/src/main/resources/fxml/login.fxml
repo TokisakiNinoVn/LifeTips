@@ -34,18 +34,26 @@
 
                 <VBox spacing="5" fillWidth="true">
                     <Label text="Email" styleClass="login-label"/>
-                    <TextField promptText="Nhập email đăng nhập của bạn"/>
+                    <TextField fx:id="emailField" promptText="Nhập email đăng nhập của bạn"/>
                 </VBox>
 
                 <VBox spacing="5" fillWidth="true">
                     <Label text="Password" styleClass="login-label"/>
-                    <PasswordField promptText="Nhập mật khẩu của bạn"/>
+                    <PasswordField fx:id="passwordField" promptText="Nhập mật khẩu của bạn"/>
                 </VBox>
 
-                <Button text="Đăng nhập" styleClass="login-button" maxWidth="Infinity"/>
-                <Hyperlink text="Chưa có tài khoản? Đăng ký" styleClass="signup-link"/>
+                <Label fx:id="errorLabel" styleClass="error-label"/>
+
+                <Button fx:id="loginButton"
+                        onAction="#handleLogin"
+                        text="Đăng nhập" styleClass="login-button" maxWidth="Infinity"/>
+
+                <Hyperlink fx:id="signUpLink"
+                           onAction="#handleSignUp"
+                           text="Chưa có tài khoản? Đăng ký" styleClass="signup-link"/>
 
             </VBox>
+
         </AnchorPane>
     </StackPane>
 

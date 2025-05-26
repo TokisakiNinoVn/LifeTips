@@ -3,6 +3,8 @@
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+*.json
+localStorage.json
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
