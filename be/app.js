@@ -15,7 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: 'http://localhost:8080',
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization',],
   credentials: true,
@@ -34,15 +34,25 @@ app.use(session({
 
 // Logging middleware
 app.use((req, res, next) => {
-  console.log(`>> [${req.method}] - URL: ${req.url}`);
+  // thêm thời gian vào logging
+  const currentTime = new Date().toISOString();
+  console.log(`>> [${currentTime}][${req.method}] - URL: ${req.url}`);
   next();
+});
+
+// api get mặc định 
+app.get('/api', (req, res) => {
+  res.status(200).json({
+    status: "Success",
+    message: "The API LifeTips Server is running!"
+  });
 });
 
 // Định nghĩa các route chính
 app.use('/api/public', authRoutes);
 app.use('/api/private', loginRequired, privateRoutes);
 
-app.use(express.static("views"));
+// app.use(express.static("views"));
 app.use(express.static('public'));
 
 // Routes

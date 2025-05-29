@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,6 +18,8 @@
         <activity android:name=".controller_ui.LoginActivity" />
         <activity android:name=".controller_ui.RegisterActivity" />
         <activity android:name=".controller_ui.AddActivity" />
+        <activity android:name=".controller_ui.DetailActivity" />
+        <activity android:name=".controller_ui.EditPostActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

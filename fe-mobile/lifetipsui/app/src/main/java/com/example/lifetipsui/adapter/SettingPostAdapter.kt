@@ -17,19 +17,17 @@ import com.bumptech.glide.Glide
 import com.example.lifetipsui.R
 import com.example.lifetipsui.config.Config
 import com.example.lifetipsui.controller_ui.DetailActivity
-import com.example.lifetipsui.flagment.DetailsPost
+import com.example.lifetipsui.controller_ui.EditPostActivity
 import com.example.lifetipsui.service.PostService
 import com.example.lifetipsui.model.Post
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class SavePostAdapter(
+class SettingPostAdapter(
     private val posts: MutableList<Post>,
     private val lifecycleOwner: LifecycleOwner
-) : RecyclerView.Adapter<SavePostAdapter.PostViewHolder>() {
+) : RecyclerView.Adapter<SettingPostAdapter.PostViewHolder>() {
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imagePost: ImageView = itemView.findViewById(R.id.imagePost)
@@ -37,12 +35,13 @@ class SavePostAdapter(
         val textContent: TextView = itemView.findViewById(R.id.textContent)
         val textUser: TextView = itemView.findViewById(R.id.textUser)
         val textCategory: TextView = itemView.findViewById(R.id.textCategory)
-        val btnUnsave: ImageView = itemView.findViewById(R.id.btnUnsave)
+        val btnDelete: ImageView = itemView.findViewById(R.id.btnDelete)
         val btnViewDetails: ImageView = itemView.findViewById(R.id.btnViewDetails)
+        val btnEdit : ImageView = itemView.findViewById(R.id.btnEdit)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_save_post, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_setting_post, parent, false)
         return PostViewHolder(view)
     }
 
@@ -68,25 +67,24 @@ class SavePostAdapter(
             holder.imagePost.setImageResource(R.drawable.img_1)
         }
 
-        holder.btnUnsave.setOnClickListener {
+        holder.btnDelete.setOnClickListener {
             val context = holder.itemView.context
             val postId = post.id
 
             AlertDialog.Builder(context)
                 .setTitle("Xác nhận")
-                .setMessage("Bạn có chắc chắn muốn hủy lưu bài viết này không?")
+                .setMessage("Bạn có chắc chắn muốn xóa bài viết này không?")
                 .setPositiveButton("Có") { dialog, _ ->
                     // Nếu người dùng xác nhận
                     lifecycleOwner.lifecycleScope.launch {
                         try {
                             val response = withContext(Dispatchers.IO) {
-                                PostService.unsavePostService(postId)
+                                PostService.deletePostService(postId)
                             }
-                            println("response unsave: $response")
                             if (response != null) {
-                                Toast.makeText(context, "Đã hủy lưu bài viết!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Đã xóa bài viết!", Toast.LENGTH_SHORT).show()
                             } else {
-                                Toast.makeText(context, "Lưu bài viết thất bại", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Xóa bài viết thất bại", Toast.LENGTH_SHORT).show()
                             }
                         } catch (e: Exception) {
                             Toast.makeText(context, "Lỗi: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
@@ -99,7 +97,13 @@ class SavePostAdapter(
                 .show()
         }
 
-
+        holder.btnEdit.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, EditPostActivity::class.java)
+            intent.putExtra("postId", post.id)
+            Toast.makeText(context, "postId: ${post.id}", Toast.LENGTH_SHORT).show()
+            context.startActivity(intent)
+        }
 
         holder.btnViewDetails.setOnClickListener {
             val context = holder.itemView.context

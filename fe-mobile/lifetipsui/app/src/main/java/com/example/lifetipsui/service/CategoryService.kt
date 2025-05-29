@@ -1,38 +1,38 @@
 package com.example.lifetipsui.service
 
-import com.example.lifetipsui.apis.UserApi
-import com.example.lifetipsui.helper.ApiMethodsPrivate
-import kotlinx.serialization.json.JsonObject
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.example.lifetipsui.apis.CategoryApi
+import com.example.lifetipsui.helper.ApiMethodsPublic
 import org.json.JSONObject
 
-class UserService {
+class CategoryService {
     companion object {
-        // Hàm lấy thông tin người dùng
-        suspend fun getInfor(): JSONObject? {
+        @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun getListCategoryService(): JSONObject? {
             return try {
-                ApiMethodsPrivate.getRequest(UserApi.getInforApi)
+                val rawJson = ApiMethodsPublic.getRaw(CategoryApi.getListCategoryApi)
+                JSONObject(rawJson) // <-- Parse JSON như bạn muốn
             } catch (e: Exception) {
-                println(">> [UserService] Error calling getInfor API: ${e.localizedMessage}")
+                println(">> [CategoryService] Error calling getListCategoryService API: ${e.localizedMessage}")
                 e.printStackTrace()
                 null
             }
         }
-
-        suspend fun updateInfor(data: Map<String, String>): JSONObject? {
-            return try {
-                val jsonBody = JSONObject()
-                for ((key, value) in data) {
-                    jsonBody.put(key, value)
-                }
-
-                val response = ApiMethodsPrivate.putRequest(UserApi.updateInforApi, jsonBody)
-                response
-            } catch (e: Exception) {
-                println(">> [UserService] Error calling updateInfor API: ${e.localizedMessage}")
-                e.printStackTrace()
-                null
-            }
-        }
-
     }
 }
+
+
+//class CategoryService {
+//    companion object {
+//        suspend fun getListCategoryService(): JSONObject? {
+//            return try {
+//                ApiMethodsPublic.get(CategoryApi.getListCategoryApi)
+//            } catch (e: Exception) {
+//                println(">> [CategoryService] Error calling getListCategoryService API: ${e.localizedMessage}")
+//                e.printStackTrace()
+//                null
+//            }
+//        }
+//    }
+//}

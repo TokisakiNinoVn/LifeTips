@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
     android:fillViewport="true"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".controller_ui.EditPostActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:title="Tạo bài viết mới"
+            app:title="Chỉnh sửa thông tin bài viết"
             app:titleTextColor="?attr/colorOnPrimary"
             app:navigationIcon="@drawable/ic_chevron_left"
             app:navigationContentDescription="Quay lại"

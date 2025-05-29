@@ -1,38 +1,34 @@
 const express = require('express');
 const router = express.Router();
 const { postController } = require('../../controllers/index');
+const { uploadWithCatch } = require('../../middlewares/multer.middleware');
+
+// Lấy thông tin chi tiết bài đăng
+router.get('/:id', postController.getById);
+// Lấy bài đăng ngẫu nhiên
+router.get('/a/random', postController.getRandomPost);
+// Lấy bài đăng cùng loại
+router.get('/b/same-type/:categoryId', postController.getPostSameCategory);
+// Lấy danh sách bài đăng của người dùng
+router.get('/c/user', postController.getAllPostOfUser);
+// Lấy danh sách bài đăng đã lưu của người dùng
+router.get('/d/saved', postController.getSavedPost);
+// Tìm kiếm bài đăng
+router.post('/e/search', postController.search);
 
 // Tạo bài đăng
-router.post('/create', postController.create);
+router.post('/create-with-file', uploadWithCatch, postController.createPostWithFile);
+// Lưu bài đăng
+router.post('/save', postController.savePost);
 
 // Cập nhật bài đăng
 router.put('/update/:id', postController.update);
 
 // Xóa bài đăng
 router.delete('/delete/:id', postController.delete);
+// Xóa bài đăng đã lưu của người dùng
+router.delete('/a/saved/:postId', postController.deleteSavedPost);
 
-// Lấy thông tin chi tiết bài đăng
-router.get('/:id', postController.getById);
 
-// Lấy tất cả bài đăng của một người dùng
-// router.get('/user/:userId', postController.getAllPostOfUser);
-
-// Tìm kiếm bài đăng theo địa chỉ
-// router.post('/search', postController.searchByAddress);
-
-// Lọc bài đăng theo tiêu chí
-// router.post('/filter', postController.filter);
-
-// Lưu bài đăng
-// router.post('/save', postController.savePost);
-
-// Lấy danh sách bài đăng đã lưu
-// router.get('/saved/:userId', postController.getSavedPost);
-
-// Lấy bài đăng mới nhất
-// router.get('/new', postController.getNewPost);
-
-// Lấy bài đăng cùng loại
-// router.post('/same-type', postController.getPostSameType);
 
 module.exports = router; 

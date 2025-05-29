@@ -31,7 +31,7 @@ exports.login = async (req, res, next) => {
     const token = jwt.sign(
       { id: user.id, email: user.email },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: '1h' }
+      { expiresIn: '48h' }
     );
 
     // Optionally store user session (if required)
@@ -70,12 +70,12 @@ exports.register = async (req, res, next) => {
     if (emailCheck.length > 0) {
       return res.status(200).json({
         code: 401,
-        message: 'Số điện thoại đã được đăng ký'
+        message: 'Email đã được đăng ký'
       });
     }
     const hashedPassword = await bcrypt.hash(password, 8);
     const createdAt = new Date();
-    const username = email.split('@')[0]; // Lấy phần trước dấu '@' trong email
+    const username = email.split('@')[0];
     await db.pool.execute('INSERT INTO users (username, full_name, email, password, created_at) VALUES (?, ?, ?, ?, ?)', [username, fullname, email,  hashedPassword, createdAt]);
     const user = { email, createdAt };
 

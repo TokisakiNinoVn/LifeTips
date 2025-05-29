@@ -25,25 +25,14 @@ exports.getUserById = async (user_id) => {
     return userResult[0];
 };
 
-// Lấy danh mục bài viết
+// Lấy danh mục bài viết từ bảng tips_post
 exports.getPostCategories = async (tipspost_id) => {
-    const [categoriesOfPost] = await db.pool.execute(`
-        SELECT * FROM category_post
-        WHERE tipspost_id = ?
-    `, [tipspost_id]);
-
-    if (categoriesOfPost.length === 0) return [];
-
-    const categoryIds = categoriesOfPost.map(c => c.category_id).join(',');
     const [categories] = await db.pool.execute(`
-        SELECT id, name, description
-        FROM categories
-        WHERE id IN (${categoryIds})
-    `);
-
-    return categories.map(c => ({
-        id: c.id,
-        name: c.name,
-        description: c.description
-    }));
+        SELECT c.id, c.name, c.description
+        FROM tips_post tp
+        JOIN categories c ON tp.category_id = c.id
+        WHERE tp.id = ?
+    `, [tipspost_id]);
+    
+    return categories.length > 0 ? categories[0] : null;
 };

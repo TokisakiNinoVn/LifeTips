@@ -1,5 +1,6 @@
 package com.example.lifetipsui.adapter
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
@@ -25,10 +26,10 @@ import org.json.JSONObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class PostAdapter(
+class SavePostAdapter(
     private val posts: MutableList<Post>,
     private val lifecycleOwner: LifecycleOwner
-) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
+) : RecyclerView.Adapter<SavePostAdapter.PostViewHolder>() {
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imagePost: ImageView = itemView.findViewById(R.id.imagePost)
@@ -36,12 +37,12 @@ class PostAdapter(
         val textContent: TextView = itemView.findViewById(R.id.textContent)
         val textUser: TextView = itemView.findViewById(R.id.textUser)
         val textCategory: TextView = itemView.findViewById(R.id.textCategory)
-        val btnSave: ImageView = itemView.findViewById(R.id.btnSave)
+        val btnUnsave: ImageView = itemView.findViewById(R.id.btnUnsave)
         val btnViewDetails: ImageView = itemView.findViewById(R.id.btnViewDetails)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_post, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_save_post, parent, false)
         return PostViewHolder(view)
     }
 
@@ -67,30 +68,37 @@ class PostAdapter(
             holder.imagePost.setImageResource(R.drawable.img_1)
         }
 
-        holder.btnSave.setOnClickListener {
+        holder.btnUnsave.setOnClickListener {
             val context = holder.itemView.context
             val postId = post.id
 
-            val body = JSONObject().apply {
-                put("postId", postId)
-            }
-
-            lifecycleOwner.lifecycleScope.launch {
-                try {
-                    val response = withContext(Dispatchers.IO) {
-                        PostService.savePostService(body)
+            AlertDialog.Builder(context)
+                .setTitle("Xác nhận")
+                .setMessage("Bạn có chắc chắn muốn hủy lưu bài viết này không?")
+                .setPositiveButton("Có") { dialog, _ ->
+                    // Nếu người dùng xác nhận
+                    lifecycleOwner.lifecycleScope.launch {
+                        try {
+                            val response = withContext(Dispatchers.IO) {
+                                PostService.unsavePostService(postId)
+                            }
+                            println("response unsave: $response")
+                            if (response != null) {
+                                Toast.makeText(context, "Đã hủy lưu bài viết!", Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(context, "Lưu bài viết thất bại", Toast.LENGTH_SHORT).show()
+                            }
+                        } catch (e: Exception) {
+                            Toast.makeText(context, "Lỗi: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                            e.printStackTrace()
+                        }
                     }
-                    if (response != null) {
-                        Toast.makeText(context, "Đã lưu bài viết!", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(context, "Lưu bài viết thất bại", Toast.LENGTH_SHORT).show()
-                    }
-                } catch (e: Exception) {
-                    Toast.makeText(context, "Lỗi: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
-                    e.printStackTrace()
+                    dialog.dismiss()
                 }
-            }
+                .setNegativeButton("Hủy", null)
+                .show()
         }
+
 
 
         holder.btnViewDetails.setOnClickListener {

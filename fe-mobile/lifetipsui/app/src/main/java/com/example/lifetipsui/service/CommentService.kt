@@ -1,34 +1,34 @@
 package com.example.lifetipsui.service
 
-import com.example.lifetipsui.apis.UserApi
+import com.example.lifetipsui.apis.CommentApi
 import com.example.lifetipsui.helper.ApiMethodsPrivate
 import kotlinx.serialization.json.JsonObject
 import org.json.JSONObject
 
-class UserService {
+class CommentService {
     companion object {
-        // Hàm lấy thông tin người dùng
-        suspend fun getInfor(): JSONObject? {
+        suspend fun getAllCommentOfPostService(postId: Int): JSONObject? {
             return try {
-                ApiMethodsPrivate.getRequest(UserApi.getInforApi)
+                val urlWithId = "${CommentApi.getAllCommentByIdPostApi}/$postId"
+                ApiMethodsPrivate.getRequest(urlWithId)
             } catch (e: Exception) {
-                println(">> [UserService] Error calling getInfor API: ${e.localizedMessage}")
+                println(">> [CommentService] Error calling getAllCommentByIdPostApi API: ${e.localizedMessage}")
                 e.printStackTrace()
                 null
             }
         }
 
-        suspend fun updateInfor(data: Map<String, String>): JSONObject? {
+        suspend fun createCommentService(postId: Int, data: Map<String, String>): JSONObject? {
             return try {
                 val jsonBody = JSONObject()
                 for ((key, value) in data) {
                     jsonBody.put(key, value)
                 }
-
-                val response = ApiMethodsPrivate.putRequest(UserApi.updateInforApi, jsonBody)
+                val url = "${CommentApi.createCommentApi}/$postId"
+                val response = ApiMethodsPrivate.postRequest(url, jsonBody)
                 response
             } catch (e: Exception) {
-                println(">> [UserService] Error calling updateInfor API: ${e.localizedMessage}")
+                println(">> [CommentService] Error calling createCommentApi API: ${e.localizedMessage}")
                 e.printStackTrace()
                 null
             }

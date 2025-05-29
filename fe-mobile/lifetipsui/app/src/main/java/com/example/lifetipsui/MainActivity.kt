@@ -7,7 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.lifetipsui.controller_ui.AddActivity
-import com.example.lifetipsui.flagment.ExploreFragment
+import com.example.lifetipsui.flagment.SettingsFragment
 import com.example.lifetipsui.flagment.HomeFragment
 import com.example.lifetipsui.flagment.ProfileFragment
 import com.example.lifetipsui.flagment.SavedFragment
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> loadFragment(HomeFragment())
-                R.id.nav_explore -> loadFragment(ExploreFragment())
+                R.id.nav_explore -> loadFragment(SettingsFragment())
                 R.id.nav_add -> {
                     val intent = Intent(this, AddActivity::class.java)
                     startActivity(intent)

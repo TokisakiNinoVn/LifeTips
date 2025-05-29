@@ -12,55 +12,67 @@
         android:id="@+id/topAppBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:theme="?attr/actionBarTheme"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="16dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="16dp">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:visibility="visible"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="18dp"
-            tools:visibility="visible">
-            <!-- Toolbar Title -->
+            android:gravity="center_vertical"
+            android:weightSum="3">
+
+            <!-- Logo hoặc Avatar -->
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/img"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/img" />
+
+            <!-- Tên ứng dụng -->
             <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="LifeTips"
+                android:textSize="22sp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+            <!-- Icon chức năng -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="LifeTips"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <!-- Toolbar Icon -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="end">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_search" />
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_rocket_launch"
+                    app:tint="@android:color/white" />
 
                 <ImageView
-                    android:id="@+id/imageView4"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_weight="2"
-                    app:srcCompat="@drawable/ic_notifications" />
-
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_notifications"
+                    app:tint="@android:color/white" />
             </LinearLayout>
-
-
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
+
 
     <!-- Tab Buttons -->
     <HorizontalScrollView

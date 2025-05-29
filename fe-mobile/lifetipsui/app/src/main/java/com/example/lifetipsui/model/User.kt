@@ -1,4 +1,5 @@
 package com.example.lifetipsui.model
 
-class User {
-}
+//class User {
+//    val full_name: String = ""
+//}

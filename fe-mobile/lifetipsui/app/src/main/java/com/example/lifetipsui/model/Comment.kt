@@ -1,4 +1,8 @@
 package com.example.lifetipsui.model
 
-class Comment {
-}
+data class Comment(
+    val content: String,
+    val fullName: String,
+    val createdAt: String,
+    val rate: Int
+)

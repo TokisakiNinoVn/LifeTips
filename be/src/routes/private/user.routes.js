@@ -9,19 +9,19 @@ const { userController } = require('../../controllers/index');
 // router.get('/basic', userController.getAllUsersBasic);
 
 // // Route to get a user by ID
-// router.get('/:id', userController.getUserById);
+router.get('/', userController.getUserInfo);
 
 // // Route to update a user's information
-router.put('/:id', userController.updateUser);
+router.put('/', userController.updateUser);
 
 // // Route to delete a user
-router.delete('/:id', userController.deleteUser);
+// router.delete('/:id', userController.deleteUser);
 
-router.post('/save', userController.savePost);
-router.post('/unsave', userController.unSavePost);
+// router.post('/save', userController.savePost);
+// router.post('/unsave', userController.unSavePost);
 
-router.get('/saved/:userId', userController.getSavedPost);
-router.get('/post/:userId', userController.getAllPostOfUser);
-router.post('/password', userController.changePassword);
+// router.get('/saved/:userId', userController.getSavedPost);
+// router.get('/post/:userId', userController.getAllPostOfUser);
+// router.post('/password', userController.changePassword);
 
 module.exports = router;

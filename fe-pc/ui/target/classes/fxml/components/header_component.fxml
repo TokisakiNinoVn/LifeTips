@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<HBox spacing="20" styleClass="header" stylesheets="@../../css/home.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.example.ui.controller.HeaderController">
+    <Label onMouseClicked="#navigateToHome" styleClass="logo" text="LifeTips" />
+    <TextField prefWidth="300" promptText="Search tips..." />
+    <Region HBox.hgrow="ALWAYS" />
+
+    <HBox alignment="CENTER_RIGHT" spacing="15">
+
+        <HBox fx:id="goHome" onMouseClicked="#navigateToHome" spacing="5" alignment="CENTER">
+            <FontIcon iconLiteral="mdi-home" iconSize="24" />
+            <Label text="Home" />
+        </HBox>
+
+        <HBox fx:id="addPostLabel" spacing="5" alignment="CENTER" onMouseClicked="#handleAddPost">
+            <FontIcon iconLiteral="mdi-plus-circle-outline" iconSize="24" />
+            <Label text="New Post" />
+        </HBox>
+
+        <HBox fx:id="goRegister" onMouseClicked="#navigateToRegister" spacing="5" alignment="CENTER">
+            <FontIcon iconLiteral="mdi-account-check" iconSize="24" />
+            <Label text="Register" />
+        </HBox>
+
+        <HBox fx:id="goLogin" onMouseClicked="#navigateToLogin" spacing="5" alignment="CENTER">
+            <FontIcon iconLiteral="mdi-account-circle" iconSize="24" />
+            <Label text="Login" />
+        </HBox>
+
+        <HBox spacing="5" alignment="CENTER">
+            <FontIcon iconLiteral="mdi-bell" iconSize="24" />
+            <Label text="Alerts" />
+        </HBox>
+
+        <!-- Nút đăng xuất -->
+        <HBox fx:id="logout" onMouseClicked="#handleLogout" spacing="5" alignment="CENTER">
+            <FontIcon iconLiteral="mdi-logout" iconSize="24" />
+            <Label text="Logout" />
+        </HBox>
+        <ImageView fx:id="profileImage" fitHeight="32" fitWidth="32" onMouseClicked="#navigateToProfile" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../assets/images/img.png" />
+        </ImageView>
+
+    </HBox>
+</HBox>

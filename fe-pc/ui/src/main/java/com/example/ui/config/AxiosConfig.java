@@ -1,6 +1,6 @@
 package com.example.ui.config;
 
-// file: src/services/AxiosConfig.java
+// file: src/config/AxiosConfig.java
 import com.example.ui.service.StorageService;
 import okhttp3.*;
 

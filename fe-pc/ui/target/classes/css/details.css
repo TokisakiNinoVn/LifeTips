@@ -1,0 +1,57 @@
+.nav-button {
+    -fx-font-size: 20px;
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #333;
+    -fx-background-radius: 5;
+}
+
+.save-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+}
+
+.submit-button {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+    -fx-padding: 8 16;
+    -fx-background-radius: 6;
+}
+
+.popup-button {
+    -fx-background-color: #FF9800;
+    -fx-text-fill: white;
+    -fx-padding: 10 20;
+    -fx-font-size: 16px;
+    -fx-background-radius: 8;
+}
+
+.comment-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #555;
+}
+
+.root {
+    -fx-background-color: linear-gradient(to bottom, #f2f2f2, #e0e0e0);
+}
+
+.label, .text {
+    -fx-text-fill: #333;
+}
+
+.save-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.submit-button {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.popup-button {
+    -fx-background-color: #FF9800;
+    -fx-text-fill: white;
+}

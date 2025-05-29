@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:enabled="false"
-            android:text="phannminhhieu@gmail.com" />
+            android:text="" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Display Name -->
@@ -60,27 +60,7 @@
             android:id="@+id/display_name_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Phan Minh Hiếu" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Username -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Tên người dùng"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/display_name_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="minhhieu2003" />
+            android:text="" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Save Button -->
@@ -96,9 +76,27 @@
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         app:cornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/username_layout"
+        app:layout_constraintTop_toBottomOf="@id/display_name_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Logout Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/logout_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="Đăng xuất"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:cornerRadius="16dp"
+        app:layout_constraintTop_toBottomOf="@id/save_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <!-- Test Button 1: Đăng nhập -->
     <com.google.android.material.button.MaterialButton
