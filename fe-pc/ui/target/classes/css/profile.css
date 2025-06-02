@@ -1,177 +1,108 @@
-/* Root styles for the profile page */
 .profile-page {
-    -fx-background-color: #f5f7fa;
-    -fx-padding: 20;
-    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-background-color: #f5f5f5;
+    -fx-font-family: 'Arial';
 }
 
-/* Header (assuming header_component.fxml has a styleClass of 'header') */
-.header {
-    -fx-background-color: #ffffff;
-    -fx-padding: 15;
-    -fx-border-color: #e0e4e8;
-    -fx-border-width: 0 0 1 0;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 2);
-}
-
-/* Profile section */
 .profile-section {
     -fx-background-color: #ffffff;
-    -fx-padding: 20;
-    -fx-border-radius: 10;
     -fx-background-radius: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 3);
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
 }
 
 .profile-image {
-    -fx-border-radius: 50%;
-    -fx-background-color: #e0e4e8;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);
-}
-
-.profile-name {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #2c3e50;
-}
-
-.profile-bio {
-    -fx-font-size: 14px;
-    -fx-text-fill: #6b7280;
-    -fx-max-width: 400;
-}
-
-/* Buttons */
-.follow-button {
-    -fx-background-color: #2563eb;
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 14px;
-    -fx-padding: 8 20;
-    -fx-background-radius: 20;
-    -fx-cursor: hand;
-}
-
-.follow-button:hover {
-    -fx-background-color: #1d4ed8;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
+    -fx-background-radius: 50%;
 }
 
-.more-button {
-    -fx-background-color: #e5e7eb;
-    -fx-text-fill: #374151;
-    -fx-font-size: 14px;
-    -fx-padding: 8 15;
-    -fx-background-radius: 20;
+.profile-email-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.profile-name-input {
+    -fx-pref-width: 250px;
+    -fx-background-radius: 5;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-padding: 8;
+}
+
+.update-profile-button {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 8 20;
     -fx-cursor: hand;
 }
 
-.more-button:hover {
-    -fx-background-color: #d1d5db;
+.update-profile-button:hover {
+    -fx-background-color: #005ba1;
 }
 
-/* Stats section */
-.profile-stats {
-    -fx-padding: 20;
-    -fx-background-color: transparent;
-}
-
-.stat-value {
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #2c3e50;
-}
-
-.stat-label {
-    -fx-font-size: 14px;
-    -fx-text-fill: #6b7280;
-}
-
-/* Tabs */
 .profile-tabs {
+    -fx-tab-min-width: 120px;
     -fx-background-color: #ffffff;
-    -fx-padding: 10;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-}
-
-.profile-tabs .tab {
-    -fx-background-color: transparent;
-    -fx-text-fill: #6b7280;
-    -fx-font-size: 14px;
-    -fx-padding: 10 20;
-}
-
-.profile-tabs .tab:selected {
-    -fx-background-color: #2563eb;
-    -fx-text-fill: #ffffff;
-    -fx-background-radius: 8;
 }
 
 .profile-tabs .tab-header-background {
-    -fx-background-color: #f5f7fa;
+    -fx-background-color: #ffffff;
 }
 
-/* Content area (posts) */
+.profile-tabs .tab {
+    -fx-background-radius: 5 5 0 0;
+}
+
+.profile-tabs .tab:selected {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: white;
+}
+
+.content-scroll {
+    -fx-background-color: transparent;
+}
+
 .content-area {
     -fx-padding: 20;
 }
 
-.post-card {
-    -fx-background-color: #ffffff;
+.filter-options {
     -fx-padding: 15;
-    -fx-border-radius: 10;
+    -fx-background-color: #ffffff;
     -fx-background-radius: 10;
-    -fx-max-width: 350;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 3);
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+}
+
+.filter-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.toggle-button {
+    -fx-background-color: #e0e0e0;
+    -fx-background-radius: 5;
+    -fx-text-fill: #333;
     -fx-cursor: hand;
 }
 
-.post-card:hover {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 12, 0, 0, 5);
-    -fx-background-color: #f8fafc;
+.toggle-button:selected {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: white;
 }
 
-.post-category {
-    -fx-font-size: 12px;
-    -fx-text-fill: #10b981;
-    -fx-font-weight: bold;
-    -fx-background-color: #ecfdf5;
-    -fx-padding: 4 8;
-    -fx-background-radius: 12;
-    -fx-alignment: center;
+.apply-filter-button, .reset-filter-button, .reload-button {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 8 15;
+    -fx-cursor: hand;
 }
 
-.post-title {
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #2c3e50;
-}
-
-.post-excerpt {
-    -fx-font-size: 14px;
-    -fx-text-fill: #6b7280;
-    -fx-max-width: 300;
-}
-
-.post-author {
-    -fx-font-size: 12px;
-    -fx-text-fill: #9ca3af;
-}
-
-.post-likes, .post-comments {
-    -fx-font-size: 12px;
-    -fx-text-fill: #6b7280;
-}
-
-/* Responsive adjustments for 1200x800 screen */
-@media screen and (max-width: 1200px) {
-    .profile-section {
-        -fx-padding: 15;
-    }
-    .post-card {
-        -fx-max-width: 300;
-    }
-    .profile-bio {
-        -fx-max-width: 350;
-    }
+.apply-filter-button:hover, .reset-filter-button:hover, .reload-button:hover {
+    -fx-background-color: #005ba1;
 }

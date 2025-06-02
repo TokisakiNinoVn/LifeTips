@@ -80,7 +80,12 @@ exports.delete = async (req, res, next) => {
         await db.pool.execute(`DELETE FROM tips_post WHERE id = ? AND user_id = ?`, [id, userId]);
 
 
-        return next({ statusCode: HTTP_STATUS.OK, message: 'Post and related data deleted successfully', data: {} }, req, res, next);
+        // return next({ statusCode: HTTP_STATUS.OK, message: 'Post and related data deleted successfully', data: {} }, req, res, next);
+        res.status(HTTP_STATUS.OK).json({
+            code: HTTP_STATUS.OK,
+            status: 'success',
+            message: 'Post and related data deleted successfully',
+        });
 
     } catch (error) {
         console.error('Error deleting post:', error);
@@ -100,6 +105,20 @@ exports.getById = async (req, res, next) => {
         if (postResult.length === 0) {
             return next(new AppError(404, 'fail', 'Post not found', []), req, res, next);
         }
+        // Lấy thêm danh sách bình luận của bài đăng
+        const [commentResult] = await db.pool.execute(`
+            SELECT c.id, c.content, c.created_at, c.rate, u.full_name, u.avatar
+            FROM comments c
+            JOIN users u ON c.user_id = u.id
+            WHERE c.tippost_id = ?
+        `, [id]);
+        
+        // Lấy thêm tổng số lượt đã lưu của bài đăng
+        const [saveCountResult] = await db.pool.execute(`
+            SELECT COUNT(*) AS save_count FROM likes_saves WHERE tippost_id = ?
+        `, [id]);
+        const saveCount = saveCountResult[0].save_count;
+
 
         const post = postResult[0];
 
@@ -113,7 +132,9 @@ exports.getById = async (req, res, next) => {
             ...post,
             filesNormal: files,
             user,
-            inforCategoryOfPost: categories
+            saveCount,
+            inforCategoryOfPost: categories,
+            comments: commentResult // Thêm danh sách bình luận vào dữ liệu bài đăng
         };
 
         res.status(200).json({
@@ -316,6 +337,7 @@ exports.getAllPostOfUser = async (req, res, next) => {
 exports.createPostWithFile = async (req, res, next) => {
     const { title, content, categoryId, isPrivate } = req.body;
     const userId = req.user.id;
+    console.log(`User ID: ${userId}, Title: ${title}, Content: ${content}, Category ID: ${categoryId}, Is Private: ${isPrivate}`);
     try {
         let createPostQuery = `
                 INSERT INTO tips_post (user_id, title, content, created_at, updated_at, category_id, is_private)
@@ -445,6 +467,7 @@ exports.getSavedPost = async (req, res, next) => {
                     SELECT * FROM files WHERE tipspost_id = ?
                 `, [post.id]);
 
+
                 // Lấy thông tin người đăng bài
                 const [userResult] = await db.pool.execute(`
                     SELECT full_name, avatar, bio, created_at, username
@@ -452,7 +475,7 @@ exports.getSavedPost = async (req, res, next) => {
                     WHERE id = ?
                 `, [post.user_id]);
 
-                return { ...post, files, user: userResult[0] };
+                return { ...post, files, user: userResult[0], };
             })
         );
 
@@ -506,6 +529,48 @@ exports.deleteSavedPost = async (req, res, next) => {
         });
     } catch (error) {
         console.error('Error unsaving post:', error);
+        return next(new AppError(HTTP_STATUS.INTERNAL_SERVER_ERROR, 'fail', error.message, []), req, res, next);
+    }
+};
+
+// Hàm lấy tất cả bài viết 
+exports.getAllPosts = async (req, res, next) => {
+    try {
+        const sql = `SELECT * FROM tips_post WHERE is_private = 0 ORDER BY created_at DESC`;
+        const [posts] = await db.pool.execute(sql);
+
+        const postsWithFiles = await Promise.all(
+            posts.map(async (post) => {
+                const [files] = await db.pool.execute(
+                    `SELECT * FROM files WHERE tipspost_id = ?`,
+                    [post.id]
+                );
+                // Lấy thông tin người đăng bài
+                const [userResult] = await db.pool.execute(`
+                    SELECT full_name, avatar
+                    FROM users
+                    WHERE id = ?
+                `, [post.user_id]);
+
+                // Lấy thông tin danh mục của bài đăng
+                const [categories] = await db.pool.execute(`
+                    SELECT c.id, c.name, c.description
+                    FROM tips_post tp
+                    JOIN categories c ON tp.category_id = c.id
+                    WHERE tp.id = ?
+                `, [post.id]);
+                post.category = categories.length > 0 ? categories[0] : null;
+                return { ...post, files, user: userResult[0] };
+            })
+        );
+        
+        res.status(HTTP_STATUS.OK).json({
+            code: HTTP_STATUS.OK,
+            totalDocs: posts.length,
+            data: postsWithFiles,
+            message: 'All posts retrieved successfully',
+        });
+    } catch (error) {
         return next(new AppError(HTTP_STATUS.INTERNAL_SERVER_ERROR, 'fail', error.message, []), req, res, next);
     }
 };

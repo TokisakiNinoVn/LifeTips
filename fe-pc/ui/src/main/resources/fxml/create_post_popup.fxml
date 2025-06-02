@@ -6,6 +6,8 @@
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane prefHeight="600.0" prefWidth="700.0" stylesheets="@../css/create_post_popup.css"
             xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -45,6 +47,19 @@
             <Label text="Upload Images/Videos (max 5):" styleClass="form-label"/>
             <Button fx:id="uploadMediaButton" text="Choose Files" onAction="#uploadMedia" />
             <Label fx:id="mediaStatusLabel" text="" styleClass="media-status"/>
+        </HBox>
+
+        <!-- Post Visibility -->
+        <HBox spacing="10.0" alignment="CENTER_LEFT">
+            <Label text="Visibility:" styleClass="form-label"/>
+            <ChoiceBox fx:id="visibilityChoiceBox" prefWidth="150.0">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Công khai"/>
+                        <String fx:value="Private"/>
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
         </HBox>
 
         <!-- Buttons -->

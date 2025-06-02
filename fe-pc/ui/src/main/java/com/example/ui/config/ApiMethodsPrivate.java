@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import org.json.JSONObject;
 
@@ -14,7 +15,7 @@ public class ApiMethodsPrivate {
     private static String token = StorageService.getToken();
 
     // Phương thức POST với token
-    public static JSONObject postRequest(String urlString, String body) {
+    public static JSONObject postRequest(String urlString, JSONObject body) {
         try {
             // Tạo URL và mở kết nối
             URL url = new URL(urlString);
@@ -22,16 +23,16 @@ public class ApiMethodsPrivate {
 
             // Thiết lập phương thức và header
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             if (token != null && !token.isEmpty()) {
                 conn.setRequestProperty("Authorization", "Bearer " + token);
             }
             conn.setDoOutput(true);
 
-            // Gửi dữ liệu
+            // Gửi dữ liệu JSON
             try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = body.toString().getBytes("utf-8");
-                os.write(input, 0, input.length);
+                byte[] input = body.toString().getBytes(StandardCharsets.UTF_8);
+                os.write(input);
             }
 
             // Đọc phản hồi
@@ -41,7 +42,7 @@ public class ApiMethodsPrivate {
                             statusCode >= 200 && statusCode < 300
                                     ? conn.getInputStream()
                                     : conn.getErrorStream(),
-                            "utf-8"));
+                            StandardCharsets.UTF_8));
 
             StringBuilder responseBuilder = new StringBuilder();
             String responseLine;

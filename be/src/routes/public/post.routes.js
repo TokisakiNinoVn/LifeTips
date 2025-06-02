@@ -13,6 +13,9 @@ router.get('/b/same-type/:categoryId', postController.getPostSameCategory);
 router.get('/c/user', postController.getAllPostOfUser);
 // Lấy danh sách bài đăng đã lưu của người dùng
 router.get('/d/saved', postController.getSavedPost);
+// Lấy danh sách bài đăng đã lưu của người dùng
+router.get('/f/all', postController.getAllPosts);
+
 // Tìm kiếm bài đăng
 router.post('/e/search', postController.search);
 

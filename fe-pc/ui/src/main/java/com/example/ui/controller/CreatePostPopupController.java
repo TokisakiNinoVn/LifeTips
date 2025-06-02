@@ -4,34 +4,20 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.impl.client.HttpClients;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import com.example.ui.service.PostService;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.net.http.HttpClient;
-import java.net.http.HttpResponse;
 import java.util.*;
-import java.util.stream.Collectors;
 
+import com.example.ui.service.PostService;
 import com.example.ui.service.CategoryService;
-
-import static javax.swing.text.DefaultStyledDocument.ElementSpec.ContentType;
 
 public class CreatePostPopupController {
     @FXML
     private TextField postTitle;
 
     @FXML
-    private TextField postDescription;
+    private ChoiceBox<String> visibilityChoiceBox;
 
     @FXML
     private TextArea postContent;
@@ -43,12 +29,12 @@ public class CreatePostPopupController {
     private ListView<String> categoryListView;
 
     private List<File> selectedMediaFiles = new ArrayList<>();
-    private Map<String, String> categoryNameToIdMap = new HashMap<>(); // Lưu map name -> id
+    private Map<String, String> categoryNameToIdMap = new HashMap<>();
 
     public Button closeButton;
 
     public void initialize() {
-        System.out.println("CreatePostPopupController initialized");
+        visibilityChoiceBox.setValue("Công khai");
         loadCategories();
     }
 
@@ -74,35 +60,32 @@ public class CreatePostPopupController {
     private void savePost() {
         String title = postTitle.getText();
         String content = postContent.getText();
-        List<String> selectedCategoryName = Collections
-                .singletonList(categoryListView.getSelectionModel().getSelectedItem());
+        String visibility = visibilityChoiceBox.getValue();
+        String selectedCategoryName = categoryListView.getSelectionModel().getSelectedItem();
 
-        List<String> categoryId = new ArrayList<>();
-        for (String name : selectedCategoryName) {
-            String id = categoryNameToIdMap.get(name);
-            if (id != null) {
-                categoryId.add(id);
-            }
-        }
-
-        if (title.isEmpty() || content.isEmpty() || categoryId.isEmpty()) {
-            System.err.println("Please fill in all fields and select at least one category.");
+        if (title.isEmpty() || content.isEmpty() || selectedCategoryName == null) {
+            System.err.println("Please fill in all fields and select a category.");
             return;
         }
 
-        // Gọi service
-        String response = PostService.createPost(title, content, categoryId, selectedMediaFiles);
-        System.out.println("Server response: " + response); // Server response: {status: 'success',"message":"Post with
-                                                            // files created successfully","data":{"postId":24}}
+        String categoryIdStr = categoryNameToIdMap.get(selectedCategoryName);
+        if (categoryIdStr == null) {
+            System.err.println("Invalid category selected.");
+            return;
+        }
 
-        // Kiểm tra phản hồi từ server: nếu status là 'success' thì hiển thị thông báo
-        // thành công và đóng popup
+        int categoryId = Integer.parseInt(categoryIdStr);
+        int visibilityPost = "Công khai".equals(visibility) ? 0 : 1;
+
+        // Gọi service
+        String response = PostService.createPost(title, content, categoryId, selectedMediaFiles, visibilityPost);
+
         try {
             JSONObject jsonResponse = new JSONObject(response);
             String status = jsonResponse.getString("status");
             if ("success".equals(status)) {
-                System.out.println(
-                        "Post created successfully with ID: " + jsonResponse.getJSONObject("data").getInt("postId"));
+                System.out.println("Post created successfully with ID: " +
+                        jsonResponse.getJSONObject("data").getInt("postId"));
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Post created successfully!", ButtonType.OK);
                 alert.showAndWait();
                 closePopup();
@@ -114,11 +97,12 @@ public class CreatePostPopupController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error processing server response: " + e.getMessage(),
-                    ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "Error processing server response: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
     }
+
 
     public void closePopup() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
@@ -127,16 +111,14 @@ public class CreatePostPopupController {
     }
 
     public void loadCategories() {
-        String json = CategoryService.getAllCategory();
-        System.out.println("Loading categories from API: " + json);
+        JSONObject jsonObject = CategoryService.getAllCategory();
 
-        if (json == null) {
+        if (jsonObject == null) {
             System.err.println("Không lấy được danh mục từ API.");
             return;
         }
 
         try {
-            JSONObject jsonObject = new JSONObject(json);
             JSONArray dataArray = jsonObject.getJSONArray("data");
 
             List<String> categoryNames = new ArrayList<>();
@@ -145,8 +127,8 @@ public class CreatePostPopupController {
             for (int i = 0; i < dataArray.length(); i++) {
                 JSONObject categoryObj = dataArray.getJSONObject(i);
                 int id = categoryObj.getInt("id");
-
                 String name = categoryObj.getString("name");
+
                 categoryNames.add(name);
                 categoryNameToIdMap.put(name, String.valueOf(id)); // map name -> id
             }
@@ -160,4 +142,5 @@ public class CreatePostPopupController {
             e.printStackTrace();
         }
     }
+
 }

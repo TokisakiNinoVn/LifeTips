@@ -4,6 +4,7 @@ import com.example.ui.helper.EventBus;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -24,7 +25,8 @@ public class HeaderController {
     public HBox goLogin;
     public HBox goRegister;
     public HBox logout;
-
+    @FXML
+    private FlowPane postsContainer;
     @FXML
     private HBox addPostLabel;
 
@@ -88,6 +90,32 @@ public class HeaderController {
         }
     }
 
+    //openListNotificationPopup
+//    private void openListNotificationPopup() {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/list_notification_component.fxml"));
+//            Parent popupContent = loader.load();
+//
+//            Stage popupStage = new Stage();
+//            popupStage.initModality(Modality.APPLICATION_MODAL);
+//            popupStage.initStyle(StageStyle.TRANSPARENT);
+//            popupStage.setScene(new Scene(popupContent, Color.TRANSPARENT));
+//            popupStage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            System.err.println("Cannot open List Notification Popup");
+//        }
+//    }
+    @FXML
+    private void navigateToListNoti() {
+        try {
+            FXRouter.goTo("noti");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Cannot navigate to Notification");
+        }
+    }
+
     @FXML
     private void navigateToProfile() {
         try {
@@ -101,7 +129,7 @@ public class HeaderController {
     @FXML
     private void navigateToHome() {
         try {
-            FXRouter.goTo("home_view");
+            FXRouter.goTo("home");
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Cannot navigate to Home");
@@ -150,7 +178,6 @@ public class HeaderController {
     // Hàm này sẽ được gọi khi người dùng nhấn vào nút "Add Post"
     @FXML
     private void handleAddPost() {
-        // Mở popup để tạo bài viết mới
         openCreatePostPopup();
     }
 
@@ -159,4 +186,8 @@ public class HeaderController {
         return StorageService.getStatusLogin();
     }
 
+
+//    public void displayListNotificationPopup() {
+//        navigateToListNoti();
+//    }
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.ui.controller.PostDetailsController"
+            stylesheets="@../css/post_details.css"
+            prefWidth="1200" prefHeight="800">
+    <!-- Header -->
+    <top>
+        <fx:include source="../fxml/components/header_component.fxml" fx:id="header"/>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <GridPane hgap="15" vgap="15" alignment="CENTER" maxWidth="800" styleClass="main-grid">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Title -->
+            <Label text="Tiêu đề" styleClass="label-title" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField fx:id="titleField" promptText="Nhập tiêu đề" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="500"/>
+
+            <!-- Content -->
+            <Label text="Nội dung" styleClass="label-title" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextArea fx:id="contentField" promptText="Nhập nội dung" styleClass="text-area" GridPane.columnIndex="1" GridPane.rowIndex="1" prefHeight="200" prefWidth="500"/>
+
+            <!-- Category -->
+            <Label text="Danh mục" styleClass="label-title" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <ComboBox fx:id="categoryComboBox" promptText="Chọn danh mục" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="500"/>
+
+            <!-- Buttons -->
+            <HBox spacing="15" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <Button text="Hủy" styleClass="cancel-button" onAction="#cancel"/>
+                <Button text="Lưu" styleClass="save-button" onAction="#savePost"/>
+            </HBox>
+
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER"/>
+                <ColumnConstraints hgrow="ALWAYS"/>
+            </columnConstraints>
+        </GridPane>
+    </center>
+</BorderPane>

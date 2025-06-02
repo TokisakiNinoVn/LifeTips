@@ -7,7 +7,7 @@
 
 <HBox spacing="20" styleClass="header" stylesheets="@../../css/home.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.example.ui.controller.HeaderController">
     <Label onMouseClicked="#navigateToHome" styleClass="logo" text="LifeTips" />
-    <TextField prefWidth="300" promptText="Search tips..." />
+<!--    <TextField prefWidth="300" promptText="Search tips..." />-->
     <Region HBox.hgrow="ALWAYS" />
 
     <HBox alignment="CENTER_RIGHT" spacing="15">
@@ -32,7 +32,7 @@
             <Label text="Login" />
         </HBox>
 
-        <HBox spacing="5" alignment="CENTER">
+        <HBox spacing="5" alignment="CENTER" onMouseClicked="#navigateToListNoti">
             <FontIcon iconLiteral="mdi-bell" iconSize="24" />
             <Label text="Alerts" />
         </HBox>

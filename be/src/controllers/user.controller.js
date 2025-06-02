@@ -156,6 +156,7 @@ exports.updateUser = async (req, res, next) => {
     // Trả về thông báo thành công
     res.status(200).json({
       message: 'User updated successfully',
+      "status": "success",
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

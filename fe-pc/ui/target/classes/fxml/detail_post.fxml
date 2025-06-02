@@ -7,168 +7,69 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="800" prefWidth="1200.0" style="-fx-background-color: #f4f4f4;"
-      stylesheets="@../css/details.css"
-      xmlns="http://javafx.com/javafx/17.0.12"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.ui.controller.DetailsController">
+<VBox prefHeight="800" prefWidth="1200.0" style="-fx-background-color: #f8f9fa;" stylesheets="@../css/details.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ui.controller.DetailsController">
 
-    <!-- Gói toàn bộ nội dung trong StackPane để hiển thị overlay nằm trên cùng -->
+    <!-- StackPane to handle overlay content -->
     <StackPane>
 
-        <!-- BorderPane chứa nội dung chính -->
+        <!-- Main content in BorderPane -->
         <BorderPane>
             <top>
                 <fx:include fx:id="header" source="../fxml/components/header_component.fxml" />
             </top>
 
             <center>
-                <HBox prefHeight="700" prefWidth="1200">
-                    <!-- Left Panel -->
-                    <VBox fx:id="imagePane" alignment="CENTER" prefWidth="800" spacing="10"
-                          style="-fx-background-color: #ffffff; -fx-padding: 20; -fx-border-color: #ccc; -fx-border-width: 0 1 0 0;">
-                        <ImageView fx:id="imageView" fitHeight="500" fitWidth="700" />
-                        <HBox alignment="CENTER" spacing="20">
-                            <Button fx:id="btnPrev" styleClass="nav-button" text="←" />
-                            <Button fx:id="btnNext" styleClass="nav-button" text="→" />
+                <HBox prefHeight="700" prefWidth="1200" alignment="CENTER">
+                    <!-- Left Panel: Image display with navigation buttons -->
+                    <VBox fx:id="imagePane" alignment="CENTER" prefWidth="800" spacing="15" style="-fx-background-color: #ffffff; -fx-padding: 25; -fx-border-color: #e0e0e0; -fx-border-width: 0 1 0 0; -fx-background-radius: 8;">
+                        <ImageView fx:id="imageView" fitHeight="500" fitWidth="700" preserveRatio="true" smooth="true" />
+                        <HBox alignment="CENTER" spacing="25">
+                            <Button fx:id="btnPrev" styleClass="nav-button" text="←" style="-fx-font-size: 18px; -fx-padding: 10 20;" />
+                            <Button fx:id="btnNext" styleClass="nav-button" text="→" style="-fx-font-size: 18px; -fx-padding: 10 20;" />
                         </HBox>
                     </VBox>
 
-                    <!-- Right Panel -->
-                    <VBox fx:id="rightPanel" prefWidth="400" spacing="10"
-                          style="-fx-background-color: #fafafa; -fx-padding: 20;">
+                    <!-- Right Panel: Comments և interaction -->
+                    <VBox fx:id="rightPanel" prefWidth="400" spacing="15" style="-fx-background-color: #ffffff; -fx-padding: 25; -fx-background-radius: 8;">
                         <HBox alignment="CENTER_LEFT" spacing="15">
-                            <Label fx:id="likesLabel" styleClass="top-info" text="♥ 120" />
-                            <Label fx:id="commentsCountLabel" styleClass="top-info" text="💬 45" />
-                            <Button fx:id="saveButton" styleClass="save-button" text="Lưu" />
+                            <Label fx:id="usernameLabel" styleClass="author-label" style="-fx-font-size: 18px; -fx-text-fill: #333;" />
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="20">
+                            <Label fx:id="likesLabel" styleClass="top-info" text="♥ 120" style="-fx-font-size: 14px; -fx-text-fill: #666;" />
+                            <Label fx:id="commentsCountLabel" styleClass="top-info" text="💬 45" style="-fx-font-size: 14px; -fx-text-fill: #666;" />
+                            <Button fx:id="saveButton" styleClass="save-button" text="Lưu" style="-fx-font-size: 14px; -fx-padding: 8 20;" />
                         </HBox>
 
-                        <ScrollPane fitToWidth="true" prefHeight="350" style="-fx-background: transparent;">
-                            <VBox fx:id="commentList" spacing="15" />
+                        <ScrollPane fitToWidth="true" prefHeight="350" style="-fx-background: transparent; -fx-border-color: transparent;">
+                            <VBox fx:id="commentList" spacing="15" style="-fx-padding: 10;" />
                         </ScrollPane>
 
-                        <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+                        <VBox spacing="12" style="-fx-background-color: #f9f9f9; -fx-padding: 20; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 8, 0, 0, 3);">
                             <HBox alignment="CENTER_LEFT" spacing="10">
-                                <Label styleClass="comment-label" text="Đánh giá:" />
-                                <ComboBox fx:id="ratingComboBox">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="1 sao" />
-                                            <String fx:value="2 sao" />
-                                            <String fx:value="3 sao" />
-                                            <String fx:value="4 sao" />
-                                            <String fx:value="5 sao" />
-                                        </FXCollections>
-                                    </items>
-                                </ComboBox>
+                                <Label styleClass="comment-label" text="Đánh giá:" style="-fx-font-size: 14px; -fx-text-fill: #333;" />
+                                <ComboBox fx:id="ratingComboBox" style="-fx-pref-width: 150;" />
                             </HBox>
-                            <TextArea fx:id="commentTextArea" prefHeight="80" promptText="Nhập bình luận..." />
-                            <Button fx:id="submitCommentButton" styleClass="submit-button" text="Gửi bình luận" />
+                            <TextArea fx:id="commentTextArea" prefHeight="80" promptText="Nhập bình luận..." style="-fx-font-size: 14px; -fx-background-radius: 5;" />
+                            <Button fx:id="submitCommentButton" styleClass="submit-button" text="Gửi bình luận" style="-fx-font-size: 14px; -fx-padding: 10 20;" />
                         </VBox>
                     </VBox>
                 </HBox>
             </center>
 
             <bottom>
-                <StackPane style="-fx-padding: 15;">
-                    <Button fx:id="showPopupButton" onAction="#showMoreTips" styleClass="popup-button" text="📄 Xem nội dung bài viết" />
+                <StackPane style="-fx-padding: 20; -fx-background-color: #ffffff; -fx-border-color: #e0e0e0; -fx-border-width: 1 0 0 0;">
+                    <Button fx:id="showPopupButton" onAction="#showMoreTips" styleClass="popup-button" text="📄 Xem nội dung bài viết" style="-fx-font-size: 16px; -fx-padding: 12 30;" />
                 </StackPane>
             </bottom>
         </BorderPane>
 
-        <!-- Popup nằm trên cùng, ở giữa dưới màn hình -->
-        <StackPane fx:id="popupOverlay"
-                   visible="false"
-                   prefHeight="500"
-                   style="-fx-background-color: rgba(255,255,255,0.6);">
-            <VBox fx:id="detailedTips"
-                  alignment="CENTER"
-                  maxWidth="900"
-                  prefHeight="500"
-                  spacing="20"
-                  style="-fx-background-color: white; -fx-padding: 30; -fx-border-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 5);"
-                  StackPane.alignment="BOTTOM_CENTER"
-                  translateY="-30"> <!-- Đẩy lên khỏi đáy một chút -->
-                <Label style="-fx-font-size: 24px; -fx-text-fill: #222;" text="📘 Nội dung chi tiết bài viết" />
-                <Text style="-fx-fill: #333; -fx-wrapping-width: 800;" text="Đây là phần nội dung chi tiết..." />
-                <Button onAction="#hideTips" styleClass="submit-button" text="Đóng" />
+        <!-- Popup overlay for detailed content -->
+        <StackPane fx:id="popupOverlay" prefHeight="500" style="-fx-background-color: rgba(0,0,0,0.5);" visible="false">
+            <VBox fx:id="detailedTips" alignment="CENTER" maxWidth="900" prefHeight="550" spacing="20" style="-fx-background-color: #ffffff; -fx-padding: 30; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 12, 0, 0, 5);" translateY="-50" StackPane.alignment="BOTTOM_CENTER">
+                <Label style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #1a1a1a;" text="📘 Nội dung chi tiết bài viết" />
+                <Text style="-fx-fill: #333; -fx-font-size: 16px; -fx-wrapping-width: 800;" text="Đây là phần nội dung chi tiết..." />
+                <Button onAction="#hideTips" styleClass="submit-button" text="Đóng" style="-fx-font-size: 14px; -fx-padding: 10 25;" />
             </VBox>
         </StackPane>
     </StackPane>
 </VBox>
-
-
-
-<!--<StackPane prefHeight="800" prefWidth="1186.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../css/details.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ui.controller.DetailsController">-->
-<!--&lt;!&ndash; Main Content &ndash;&gt;-->
-<!--<VBox prefHeight="800" prefWidth="1186.0">-->
-<!--    <BorderPane>-->
-<!--        &lt;!&ndash; Header &ndash;&gt;-->
-<!--        <top>-->
-<!--            <fx:include fx:id="header" source="../fxml/components/header_component.fxml" />-->
-<!--        </top>-->
-
-<!--        &lt;!&ndash; Main Content &ndash;&gt;-->
-<!--        <center>-->
-<!--            <HBox prefHeight="700" prefWidth="1200">-->
-<!--                &lt;!&ndash; Left Panel &ndash;&gt;-->
-<!--                <VBox fx:id="imagePane" alignment="CENTER" prefWidth="800" spacing="10" style="-fx-background-color: #ffffff; -fx-padding: 20; -fx-border-color: #ccc; -fx-border-width: 0 1 0 0;">-->
-<!--                    <ImageView fx:id="imageView" fitHeight="500" fitWidth="700" />-->
-<!--                    <HBox alignment="CENTER" spacing="20">-->
-<!--                        <Button fx:id="btnPrev" styleClass="nav-button" text="←" />-->
-<!--                        <Button fx:id="btnNext" styleClass="nav-button" text="→" />-->
-<!--                    </HBox>-->
-<!--                </VBox>-->
-
-<!--                &lt;!&ndash; Right Panel &ndash;&gt;-->
-<!--                <VBox fx:id="rightPanel" prefWidth="400" spacing="10" style="-fx-background-color: #fafafa; -fx-padding: 20;">-->
-<!--                    <HBox alignment="CENTER_LEFT" spacing="15">-->
-<!--                        <Label fx:id="likesLabel" styleClass="top-info" text="♥ 120" />-->
-<!--                        <Label fx:id="commentsCountLabel" styleClass="top-info" text="💬 45" />-->
-<!--                        <Button fx:id="saveButton" styleClass="save-button" text="Lưu" />-->
-<!--                    </HBox>-->
-
-<!--                    <ScrollPane fitToWidth="true" prefHeight="350" style="-fx-background: transparent;">-->
-<!--                        <VBox fx:id="commentList" spacing="15" />-->
-<!--                    </ScrollPane>-->
-
-<!--                    <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">-->
-<!--                        <HBox alignment="CENTER_RIGHT">-->
-<!--                            <Label styleClass="comment-label" text="Đánh giá:" />-->
-<!--                            <ComboBox fx:id="ratingComboBox">-->
-<!--                                <items>-->
-<!--                                    <FXCollections fx:factory="observableArrayList">-->
-<!--                                        <String fx:value="1 sao" />-->
-<!--                                        <String fx:value="2 sao" />-->
-<!--                                        <String fx:value="3 sao" />-->
-<!--                                        <String fx:value="4 sao" />-->
-<!--                                        <String fx:value="5 sao" />-->
-<!--                                    </FXCollections>-->
-<!--                                </items>-->
-<!--                            </ComboBox>-->
-<!--                        </HBox>-->
-<!--                        <TextArea fx:id="commentTextArea" prefHeight="80" promptText="Nhập bình luận..." />-->
-<!--                        <Button fx:id="submitCommentButton" styleClass="submit-button" text="Gửi bình luận" />-->
-<!--                    </VBox>-->
-<!--                </VBox>-->
-<!--            </HBox>-->
-<!--        </center>-->
-
-<!--        &lt;!&ndash; Bottom Button &ndash;&gt;-->
-<!--        <bottom>-->
-<!--            <StackPane style="-fx-padding: 15;">-->
-<!--                <Button fx:id="showPopupButton" onAction="#showMoreTips" styleClass="popup-button" text="📄 Xem nội dung bài viết" />-->
-<!--            </StackPane>-->
-<!--        </bottom>-->
-<!--    </BorderPane>-->
-<!--</VBox>-->
-
-<!--&lt;!&ndash; Overlay Blur Background + Popup &ndash;&gt;-->
-<!--<StackPane fx:id="popupOverlay" style="-fx-background-color: rgba(255,255,255,0.6);" visible="false">-->
-<!--    <VBox fx:id="detailedTips" alignment="TOP_CENTER" maxWidth="900" spacing="20" style="-fx-background-color: white; -fx-padding: 30; -fx-border-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 5);" StackPane.alignment="BOTTOM_CENTER">-->
-<!--        <Label style="-fx-font-size: 24px; -fx-text-fill: #222;" text="📘 Nội dung chi tiết bài viết" />-->
-<!--        <Text style="-fx-fill: #333; -fx-wrapping-width: 800;" text="Đây là phần nội dung chi tiết..." />-->
-<!--        <Button onAction="#hideTips" styleClass="submit-button" text="Đóng" />-->
-<!--    </VBox>-->
-<!--</StackPane>-->
-<!--</StackPane>-->

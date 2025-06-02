@@ -21,44 +21,34 @@
 
     <center>
         <VBox spacing="20" styleClass="main-content">
-            <FlowPane hgap="10" vgap="10">
-                <Button text="All"/>
-                <Button text="Cooking"/>
-                <Button text="Health"/>
-                <Button text="Study"/>
-                <Button text="Family"/>
-                <Button text="Work"/>
-                <Button text="Technology"/>
+            <!-- Search Box -->
+            <HBox spacing="10"
+            alignment="CENTER_LEFT"
+            styleClass="search-box"
+            prefHeight="50"
+            prefWidth="300"
+            >
+                <TextField fx:id="searchField" promptText="Tìm kiếm theo tên bài viết hoặc mô tả bài viết..." styleClass="search-field"/>
+                <Button text="Search" onAction="#handleSearch" styleClass="search-button"/>
+                <!-- Nút reload để load lại các thông tin -->
+                <HBox fx:id="logout" onMouseClicked="#handleReload" spacing="5" alignment="CENTER">
+                    <FontIcon iconLiteral="mdi-cached" iconSize="24" />
+                    <Label text="Refresh" />
+                </HBox>
+                <Button  >
+                    <FontIcon iconLiteral="mdi-cached" iconSize="24" />
+                    <Label text="Refresh" />
+                </Button>
+            </HBox>
+
+            <!-- Categories -->
+            <Label text="Các danh mục:" styleClass="section-label"/>
+            <FlowPane hgap="10" vgap="10" fx:id="categoryButtons">
+                <!-- Categories will be loaded dynamically -->
             </FlowPane>
 
-            <HBox spacing="20"
-                  fx:id="goDetailsPost"
-                  onMouseClicked="#goDetailsPost"
-            >
-                <VBox spacing="10" styleClass="tip-card">
-                    <Label text="Study" styleClass="tip-category"/>
-                    <Label text="5 Essential Study Techniques" styleClass="tip-title"/>
-                    <Label text="Improve your learning efficiency with these proven methods..." wrapText="true"/>
-                    <Label text="By Sarah Johnson" styleClass="tip-author"/>
-                    <HBox spacing="10">
-                        <Label text="❤️24"/>
-                        <Label text="💬5"/>
-                        <Label text="🔗"/>
-                    </HBox>
-                </VBox>
-
-                <VBox spacing="10" styleClass="tip-card">
-                    <Label text="Cooking" styleClass="tip-category"/>
-                    <Label text="Quick and Healthy Breakfast Ideas" styleClass="tip-title"/>
-                    <Label text="Start your day right with these nutritious recipes..." wrapText="true"/>
-                    <Label text="By Mike Chen" styleClass="tip-author"/>
-                    <HBox spacing="10">
-                        <Label text="❤️42"/>
-                        <Label text="💬8"/>
-                        <Label text="🔗"/>
-                    </HBox>
-                </VBox>
-            </HBox>
+            <!-- Posts -->
+            <FlowPane fx:id="postsContainer" hgap="20" vgap="20" alignment="TOP_CENTER"/>
         </VBox>
     </center>
 

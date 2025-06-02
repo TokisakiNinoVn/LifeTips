@@ -1,11 +1,5 @@
 package com.example.ui.service;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import java.io.IOException;
-import com.example.ui.apis.PostApi;
-import com.example.ui.config.ApiMethodsPrivate;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -15,20 +9,21 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.net.http.HttpClient;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.ui.config.ApiMethodsPrivate;
+import com.example.ui.config.ApiMethodsPublic;
+import com.example.ui.apis.PostApi;
+
 public class PostService {
-    // private static final OkHttpClient client = new OkHttpClient();
     private static String token = StorageService.getToken();
     // Tạo bài viết mới
-    public static String createPost(String title, String content, List<String> categoryIds, List<File> mediaFiles) {
+    public static String createPost(String title, String content, int categoryIds, List<File> mediaFiles, int visibility) {
         String url = PostApi.createPostEndpoint();
 
         try {
@@ -39,11 +34,8 @@ public class PostService {
             // Add text fields
             builder.addTextBody("title", title, ContentType.TEXT_PLAIN);
             builder.addTextBody("content", content, ContentType.TEXT_PLAIN);
-
-            // Add categories
-            for (String catId : categoryIds) {
-                builder.addTextBody("categoryId", catId, ContentType.TEXT_PLAIN);
-            }
+            builder.addTextBody("isPrivate", String.valueOf(visibility), ContentType.TEXT_PLAIN);
+            builder.addTextBody("categoryId", String.valueOf(categoryIds), ContentType.TEXT_PLAIN);
 
             // Add files
             for (File file : mediaFiles) {
@@ -85,7 +77,55 @@ public class PostService {
 
     // Lấy danh sách bài viết
     public static JSONObject getPosts() {
-        String url = PostApi.getAllPostEndpoint();
+        String url = PostApi.GETALLPOST_ENDPOINT;
+        return ApiMethodsPublic.getRequest(url, null);
+    }
+
+    // Lấy thông tin chi tiết bài viết
+    public static JSONObject getPostById(int id) {
+        String url = PostApi.GETPOSTBYID_ENDPOINT;
+        return ApiMethodsPublic.getRequest(url, id);
+    }
+
+    // Tạo bình luận
+    public static JSONObject createComment(int postId, JSONObject body) {
+        String url = PostApi.createCommentPostApi + "/" + postId;
+        return ApiMethodsPrivate.postRequest(url, body);
+    }
+
+    // Lưu bài viết
+    public static JSONObject savePost(JSONObject body) {
+        String url = PostApi.savePostApi;
+        return ApiMethodsPrivate.postRequest(url, body);
+    }
+
+    // Lấy danh sách bài viết đã lưu
+    public static JSONObject getSavedPosts() {
+        String url = PostApi.getAllSavePostApi;
         return ApiMethodsPrivate.getRequest(url);
+    }
+
+    // Xóa bài viết
+    public static JSONObject deletePost(int postId) {
+        String url = PostApi.DELETEPOST_ENDPOINT + "/" + postId;
+        return ApiMethodsPrivate.deleteRequest(url);
+    }
+
+    // Cập nhật bài viết
+    public static JSONObject updatePost(int postId, JSONObject body) {
+        String url = PostApi.UPDATEPOST_ENDPOINT + "/" + postId;
+        return ApiMethodsPrivate.putRequest(url, body);
+    }
+
+    // Lấy các bài viết của người dùng
+    public static JSONObject getUserPostsService() {
+        String url = PostApi.getAllPostUserApi;
+        return ApiMethodsPrivate.getRequest(url);
+    }
+
+    // Bỏ lưu bài viết
+    public static JSONObject unsavePost(int postId) {
+        String url = PostApi.unavePostApi + "/" + postId;
+        return ApiMethodsPrivate.deleteRequest(url);
     }
 }
