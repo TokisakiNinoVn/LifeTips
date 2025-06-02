@@ -49,7 +49,7 @@
                         text="Đăng nhập" styleClass="login-button" maxWidth="Infinity"/>
 
                 <Hyperlink fx:id="signUpLink"
-                           onAction="#handleSignUp"
+                           onMouseClicked="#handleSignUp"
                            text="Chưa có tài khoản? Đăng ký" styleClass="signup-link"/>
 
             </VBox>

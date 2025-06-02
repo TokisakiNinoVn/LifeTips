@@ -51,11 +51,9 @@ public class LoginController {
         new Thread(() -> {
             try {
                 String response = AuthService.login(email, password);
-                System.out.println("Login response: " + response);
                 String token = response.split("\"token\":\"")[1].split("\"")[0];
                 String rawStatus = response.split("\"status\":\"")[1].split("\"")[0];
                 if (rawStatus.equals("success")) {
-//                    System.out.println("Đăng nhập thành công.");
                     StorageService.saveToken(token);
                     StorageService.setStatusLogin("true");
                     EventBus.post("UserLoggedIn");
@@ -91,7 +89,12 @@ public class LoginController {
     }
 
     @FXML
-    public void handleSignUp(ActionEvent actionEvent) {
-        errorLabel.setText("Tính năng đăng ký chưa được hỗ trợ.");
+    public void handleSignUp() {
+        try {
+            FXRouter.goTo("register");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Cannot navigate to Profile");
+        }
     }
 }

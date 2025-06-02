@@ -51,7 +51,7 @@ public class HomeController {
         try {
             JSONObject response = CategoryService.getAllCategory();
             JSONArray categories = response.getJSONArray("data");
-            
+
             categoryButtons.getChildren().clear();
 
             // Add "All" button

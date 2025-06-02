@@ -1,12 +1,17 @@
 package com.example.ui.service;
 
 import com.example.ui.apis.AuthApi;
+import com.example.ui.apis.UserApi;
+import com.example.ui.config.ApiMethodsPrivate;
+import com.example.ui.config.ApiMethodsPublic;
 import com.google.gson.Gson;
 import okhttp3.*;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.json.JSONObject;
 
 public class AuthService {
     private static final OkHttpClient client = new OkHttpClient();
@@ -35,5 +40,18 @@ public class AuthService {
 
             return response.body().string();
         }
+    }
+
+    // update thông tin
+    // public static JSONObject updateUserService(JSONObject body) {
+    //     String url = UserApi.updateInforUserApi;
+    //     return ApiMethodsPrivate.putRequest(url, body);
+    // }
+
+
+    // Hmaf Đăng ký
+    public static JSONObject register(JSONObject body) throws IOException {
+        String url = AuthApi.getRegisterUrl();
+        return ApiMethodsPublic.postRequest(url, body);
     }
 }

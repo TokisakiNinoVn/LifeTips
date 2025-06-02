@@ -32,23 +32,28 @@
 
                         <VBox spacing="5">
                             <Label styleClass="register-label" text="Email" />
-                            <TextField promptText="Nhập email đăng ký của bạn" />
+                            <TextField fx:id="emailField" promptText="Nhập email đăng ký của bạn" />
                         </VBox>
 
                         <VBox spacing="5">
                             <Label styleClass="register-label" text="Password" />
-                            <PasswordField promptText="Nhập mật khẩu của bạn" />
+                            <PasswordField fx:id="passwordField" promptText="Nhập mật khẩu của bạn" />
                         </VBox>
 
                         <VBox spacing="5">
                             <Label styleClass="register-label" text="Repassword" />
-                            <PasswordField promptText="Nhập lại mật khẩu của bạn" />
+                            <PasswordField fx:id="repasswordField" promptText="Nhập lại mật khẩu của bạn" />
                         </VBox>
 
-                        <Button styleClass="register-button" text="Đăng ký" />
+                        <VBox spacing="5">
+                            <Label styleClass="register-label" text="Họ và tên" />
+                            <TextField fx:id="fullnameField" promptText="Nhập họ tên của bạn" />
+                        </VBox>
 
-                        <Hyperlink styleClass="signup-link" text="Đã có tài khoản? Đăng nhập" />
+                        <Button onMouseClicked="#sendInfoRegister" styleClass="register-button" text="Đăng ký" />
 
+                        <Hyperlink styleClass="signup-link" text="Đã có tài khoản? Đăng nhập" onMouseClicked="#toLogin" />
+                        <Hyperlink styleClass="signup-link" text="Trở về trang chủ" onMouseClicked="#toHome" />
                     </VBox>
                 </AnchorPane>
             </StackPane>

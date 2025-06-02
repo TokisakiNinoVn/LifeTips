@@ -1,68 +1,82 @@
+/* profile.css */
 .profile-page {
     -fx-background-color: #f5f5f5;
-    -fx-font-family: 'Arial';
+    -fx-padding: 0 30 30 30;
 }
 
 .profile-section {
-    -fx-background-color: #ffffff;
+    -fx-background-color: white;
     -fx-background-radius: 10;
-    -fx-border-color: #e0e0e0;
-    -fx-border-radius: 10;
-    -fx-border-width: 1;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
 }
 
 .profile-image {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
-    -fx-background-radius: 50%;
+    -fx-border-radius: 70;
+    -fx-background-radius: 70;
+    -fx-border-width: 3;
+    -fx-border-color: #4a90e2;
 }
 
 .profile-email-label {
     -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #333;
+    -fx-text-fill: #666;
 }
 
 .profile-name-input {
-    -fx-pref-width: 250px;
+    -fx-font-size: 18px;
+    -fx-pref-width: 300;
+    -fx-padding: 8 12;
     -fx-background-radius: 5;
-    -fx-border-color: #ccc;
-    -fx-border-radius: 5;
-    -fx-padding: 8;
 }
 
 .update-profile-button {
-    -fx-background-color: #0078d7;
+    -fx-background-color: #4a90e2;
     -fx-text-fill: white;
-    -fx-background-radius: 5;
+    -fx-font-weight: bold;
     -fx-padding: 8 20;
-    -fx-cursor: hand;
+    -fx-background-radius: 5;
 }
 
 .update-profile-button:hover {
-    -fx-background-color: #005ba1;
+    -fx-background-color: #3a7bc8;
 }
 
 .profile-tabs {
     -fx-tab-min-width: 120px;
-    -fx-background-color: #ffffff;
-}
-
-.profile-tabs .tab-header-background {
-    -fx-background-color: #ffffff;
+    -fx-tab-min-height: 40px;
 }
 
 .profile-tabs .tab {
-    -fx-background-radius: 5 5 0 0;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
 }
 
 .profile-tabs .tab:selected {
-    -fx-background-color: #0078d7;
+    -fx-background-color: #4a90e2;
     -fx-text-fill: white;
+}
+
+.tab-reload-container {
+    -fx-padding: 0 30;
+}
+
+.reload-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #4a90e2;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-text-fill: #4a90e2;
+    -fx-font-weight: bold;
+    -fx-padding: 5 15;
+}
+
+.reload-button:hover {
+    -fx-background-color: #e6f0fa;
 }
 
 .content-scroll {
     -fx-background-color: transparent;
+    -fx-padding: 0 30;
 }
 
 .content-area {
@@ -70,39 +84,67 @@
 }
 
 .filter-options {
-    -fx-padding: 15;
-    -fx-background-color: #ffffff;
+    -fx-background-color: white;
     -fx-background-radius: 10;
-    -fx-border-color: #e0e0e0;
-    -fx-border-radius: 10;
-    -fx-border-width: 1;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);
+}
+
+.section-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a90e2;
+    -fx-padding: 0 0 10 0;
 }
 
 .filter-label {
     -fx-font-size: 14px;
-    -fx-font-weight: bold;
+    -fx-text-fill: #666;
 }
 
 .toggle-button {
-    -fx-background-color: #e0e0e0;
+    -fx-padding: 5 15;
     -fx-background-radius: 5;
-    -fx-text-fill: #333;
-    -fx-cursor: hand;
 }
 
 .toggle-button:selected {
-    -fx-background-color: #0078d7;
+    -fx-background-color: #4a90e2;
     -fx-text-fill: white;
 }
 
-.apply-filter-button, .reset-filter-button, .reload-button {
-    -fx-background-color: #0078d7;
+.primary-button {
+    -fx-background-color: #4a90e2;
     -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20;
     -fx-background-radius: 5;
-    -fx-padding: 8 15;
-    -fx-cursor: hand;
 }
 
-.apply-filter-button:hover, .reset-filter-button:hover, .reload-button:hover {
-    -fx-background-color: #005ba1;
+.primary-button:hover {
+    -fx-background-color: #3a7bc8;
+}
+
+.outline-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #4a90e2;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-text-fill: #4a90e2;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20;
+}
+
+.outline-button:hover {
+    -fx-background-color: #e6f0fa;
+}
+
+.secondary-button {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #333;
+    -fx-padding: 5 15;
+    -fx-background-radius: 5;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #d0d0d0;
 }
