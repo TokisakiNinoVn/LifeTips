@@ -1,0 +1,40 @@
+.heading {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.form-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #34495e;
+    -fx-min-width: 120px;
+}
+
+.text-field, .text-area {
+    -fx-background-color: #ecf0f1;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 5px;
+}
+
+.submit-button {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 8px 20px;
+}
+
+.cancel-button {
+    -fx-background-color: #c0392b;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 8px 20px;
+}
+
+.media-status {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-style: italic;
+}

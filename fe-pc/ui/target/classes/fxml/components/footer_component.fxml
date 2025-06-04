@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox
+    stylesheets="@../../css/footer.css"
+    spacing="20"
+    alignment="CENTER_LEFT"
+    styleClass="footer">
+    
+    <Label text="LifeTips" styleClass="logo"/>
+    <Region HBox.hgrow="ALWAYS"/>
+    <VBox spacing="5">
+        <Label text="Email: contact@lifetips.com"/>
+        <Label text="Phone: +84 123 456 789"/>
+    </VBox>
+</HBox>

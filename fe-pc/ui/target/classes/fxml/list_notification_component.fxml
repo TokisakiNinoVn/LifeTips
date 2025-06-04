@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<?import java.lang.String?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.ui.controller.ListNotificationController"
+            prefWidth="1200" prefHeight="800"
+            style="-fx-background-color: #f5f7fa;">
+    <top>
+        <VBox style="-fx-background-color: #ffffff; -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;">
+            <children>
+                <fx:include source="../fxml/components/header_component.fxml" fx:id="header"/>
+                <Label text="Notifications" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333333; -fx-padding: 10;">
+                    <graphic>
+                        <FontIcon iconLiteral="mdi-bell" iconSize="24" style="-fx-icon-color: #007bff;"/>
+                    </graphic>
+                </Label>
+            </children>
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+        </VBox>
+    </top>
+    <center>
+        <AnchorPane style="-fx-background-color: #ffffff; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 5;">
+            <children>
+                <ListView fx:id="notificationListView"
+                          prefHeight="Infinity"
+                          prefWidth="Infinity"
+                          style="-fx-background-color: transparent; -fx-font-size: 14px;"
+                          AnchorPane.topAnchor="10.0"
+                          AnchorPane.bottomAnchor="10.0"
+                          AnchorPane.leftAnchor="10.0"
+                          AnchorPane.rightAnchor="10.0">
+                    <styleClass>
+                        <String fx:value="notification-list"/>
+                    </styleClass>
+                </ListView>
+            </children>
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+        </AnchorPane>
+    </center>
+</BorderPane>

@@ -42,6 +42,8 @@ public class DetailsController {
     @FXML
     private Button saveButton;
     @FXML
+    private Button shareButton;
+    @FXML
     private VBox commentList;
     @FXML
     private ComboBox<String> ratingComboBox;
@@ -86,6 +88,7 @@ public class DetailsController {
         btnNext.setOnAction(event -> showNextImage());
         submitCommentButton.setOnAction(event -> submitComment());
         saveButton.setOnAction(event -> savePost());
+        shareButton.setOnAction(event -> sharePost());
 
         ObservableList<String> ratings = FXCollections.observableArrayList(
                 new ArrayList<>(ratingValues.keySet()));
@@ -301,5 +304,19 @@ public class DetailsController {
         slideOut.setInterpolator(Interpolator.EASE_IN);
         slideOut.setOnFinished(event -> popupOverlay.setVisible(false));
         slideOut.play();
+    }
+
+    // Hàm xử lý khi nhấn shareButton - copy link bài viết vào clipboard
+    @FXML
+    private void sharePost() {
+        String postUrl = constant.BASE_URL + "/public/post/" + postId; // Giả sử đây là URL bài viết
+        java.awt.datatransfer.StringSelection stringSelection = new java.awt.datatransfer.StringSelection(postUrl);
+        java.awt.Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Chia sẻ thành công");
+        alert.setHeaderText(null);
+        alert.setContentText("Đã sao chép liên kết bài viết vào clipboard!");
+        alert.showAndWait();
     }
 }

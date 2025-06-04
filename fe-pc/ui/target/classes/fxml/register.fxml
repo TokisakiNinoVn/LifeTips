@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- Giao diện Đăng ký -->
+<VBox prefHeight="800" prefWidth="1200" stylesheets="@../css/register.css"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.ui.controller.RegisterController">
+
+    <BorderPane prefHeight="800.0" prefWidth="1200.0">
+
+        <!-- Header -->
+        <top>
+            <fx:include fx:id="header" source="../fxml/components/header_component.fxml" />
+        </top>
+
+        <!-- Form căn giữa -->
+        <center>
+            <StackPane BorderPane.alignment="CENTER">
+                <AnchorPane fx:id="registerContainer" styleClass="register-container"
+                            maxWidth="400" maxHeight="500"
+                            AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+                            AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0">
+
+                    <VBox spacing="15" alignment="CENTER"
+                          AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20"
+                          AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20">
+
+                        <Label styleClass="register-title" text="Đăng ký" />
+
+                        <VBox spacing="5">
+                            <Label styleClass="register-label" text="Email" />
+                            <TextField fx:id="emailField" promptText="Nhập email đăng ký của bạn" />
+                        </VBox>
+
+                        <VBox spacing="5">
+                            <Label styleClass="register-label" text="Password" />
+                            <PasswordField fx:id="passwordField" promptText="Nhập mật khẩu của bạn" />
+                        </VBox>
+
+                        <VBox spacing="5">
+                            <Label styleClass="register-label" text="Repassword" />
+                            <PasswordField fx:id="repasswordField" promptText="Nhập lại mật khẩu của bạn" />
+                        </VBox>
+
+                        <VBox spacing="5">
+                            <Label styleClass="register-label" text="Họ và tên" />
+                            <TextField fx:id="fullnameField" promptText="Nhập họ tên của bạn" />
+                        </VBox>
+
+                        <Button onMouseClicked="#sendInfoRegister" styleClass="register-button" text="Đăng ký" />
+
+                        <Hyperlink styleClass="signup-link" text="Đã có tài khoản? Đăng nhập" onMouseClicked="#toLogin" />
+                        <Hyperlink styleClass="signup-link" text="Trở về trang chủ" onMouseClicked="#toHome" />
+                    </VBox>
+                </AnchorPane>
+            </StackPane>
+        </center>
+
+    </BorderPane>
+</VBox>

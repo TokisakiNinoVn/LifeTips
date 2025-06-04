@@ -1,5 +1,6 @@
 package com.example.lifetipsui.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
@@ -102,6 +103,12 @@ class PostAdapter(
                 putExtra(Intent.EXTRA_TEXT, postUrl)
             }
             context.startActivity(Intent.createChooser(intent, "Chia sẻ bài viết"))
+
+            // copy the post link to clipboard
+            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+            val clip = android.content.ClipData.newPlainText("Post Link", postUrl)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(context, "Đã sao chép liên kết bài viết", Toast.LENGTH_SHORT).show()
         }
 
         holder.btnViewDetails.setOnClickListener {

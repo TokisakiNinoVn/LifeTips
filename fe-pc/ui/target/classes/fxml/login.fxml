@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- Giao diện đăng nhập -->
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.ui.controller.LoginController"
+      prefWidth="1200"
+      prefHeight="800"
+      stylesheets="@../css/login.css">
+
+    <!-- Header -->
+    <fx:include source="../fxml/components/header_component.fxml" fx:id="header"/>
+
+    <!-- Form Login căn giữa -->
+    <StackPane alignment="CENTER" VBox.vgrow="ALWAYS">
+        <AnchorPane fx:id="loginContainer"
+                    styleClass="login-container"
+                    maxWidth="400" maxHeight="450"
+                    AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                    AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+            <VBox spacing="15"
+                  AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20"
+                  AnchorPane.topAnchor="40" AnchorPane.bottomAnchor="20"
+                  alignment="CENTER">
+
+                <Label text="Đăng nhập" styleClass="login-title" />
+
+                <VBox spacing="5" fillWidth="true">
+                    <Label text="Email" styleClass="login-label"/>
+                    <TextField fx:id="emailField" promptText="Nhập email đăng nhập của bạn"/>
+                </VBox>
+
+                <VBox spacing="5" fillWidth="true">
+                    <Label text="Password" styleClass="login-label"/>
+                    <PasswordField fx:id="passwordField" promptText="Nhập mật khẩu của bạn"/>
+                </VBox>
+
+                <Label fx:id="errorLabel" styleClass="error-label"/>
+
+                <Button fx:id="loginButton"
+                        onAction="#handleLogin"
+                        text="Đăng nhập" styleClass="login-button" maxWidth="Infinity"/>
+
+                <Hyperlink fx:id="signUpLink"
+                           onMouseClicked="#handleSignUp"
+                           text="Chưa có tài khoản? Đăng ký" styleClass="signup-link"/>
+
+            </VBox>
+
+        </AnchorPane>
+    </StackPane>
+
+</VBox>

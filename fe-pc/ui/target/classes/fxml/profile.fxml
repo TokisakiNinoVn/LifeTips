@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      stylesheets="@../css/profile.css"
+      spacing="20"
+      fx:controller="com.example.ui.controller.ProfileController"
+      prefWidth="1200"
+      prefHeight="800"
+      styleClass="profile-page">
+
+    <fx:include source="../fxml/components/header_component.fxml" fx:id="header"/>
+
+    <!-- Profile Section -->
+    <GridPane hgap="20" vgap="15" alignment="CENTER" styleClass="profile-section">
+        <padding><Insets top="30" right="30" bottom="30" left="30"/></padding>
+        <ImageView fitWidth="140" fitHeight="140" preserveRatio="true" styleClass="profile-image" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="3">
+            <Image url="@../assets/images/img.png"/>
+        </ImageView>
+        <Label fx:id="emailLabel" text="" styleClass="profile-email-label" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="fullName" promptText="Enter your full name" styleClass="profile-name-input"/>
+            <Button text="Update" styleClass="update-profile-button" onAction="#updateProfile"/>
+        </HBox>
+        <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button text="Change Avatar" styleClass="secondary-button"/>
+            <Button text="Change Password" styleClass="secondary-button"/>
+        </HBox>
+    </GridPane>
+
+    <!-- Tabs and Reload Button Container -->
+    <HBox spacing="20" alignment="CENTER_LEFT" styleClass="tab-reload-container">
+        <TabPane styleClass="profile-tabs" fx:id="profileTabPane">
+            <tabs>
+                <Tab text="My Tips" closable="false" fx:id="myTipsTab"/>
+                <Tab text="Saved" closable="false" fx:id="savedTab"/>
+            </tabs>
+        </TabPane>
+        <Button text="Reload Data" styleClass="reload-button" fx:id="reloadButton" onAction="#reloadData"/>
+    </HBox>
+
+    <!-- Content Area (Posts) -->
+    <ScrollPane fitToWidth="true" styleClass="content-scroll" hbarPolicy="NEVER">
+        <VBox fx:id="postsContainer" alignment="TOP_CENTER" spacing="20" styleClass="content-area">
+            <!-- Filter Options (visible only in My Tips tab) -->
+            <VBox fx:id="filterOptions" spacing="15" styleClass="filter-options" visible="false">
+                <Label text="FILTER OPTIONS" styleClass="section-label"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Visibility:" styleClass="filter-label"/>
+                    <ToggleButton text="Public" selected="true" fx:id="publicToggle" styleClass="toggle-button"/>
+                    <ToggleButton text="Private" fx:id="privateToggle" styleClass="toggle-button"/>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Sort by:" styleClass="filter-label"/>
+                    <ComboBox fx:id="sortComboBox" styleClass="filter-combo-box" promptText="Select sort option"/>
+                </HBox>
+                <HBox spacing="15" alignment="CENTER_RIGHT">
+                    <Button text="Reset" styleClass="outline-button" onAction="#resetFilter"/>
+                    <Button text="Apply Filters" styleClass="primary-button" onAction="#applyFilter"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+</VBox>
