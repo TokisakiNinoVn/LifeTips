@@ -20,6 +20,7 @@
         <activity android:name=".controller_ui.AddActivity" />
         <activity android:name=".controller_ui.DetailActivity" />
         <activity android:name=".controller_ui.EditPostActivity" />
+        <activity android:name=".controller_ui.NotificationActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

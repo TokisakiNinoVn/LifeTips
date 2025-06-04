@@ -68,9 +68,9 @@ exports.register = async (req, res, next) => {
   try {
     const [emailCheck] = await db.pool.execute('SELECT * FROM users WHERE email = ?', [email]);
     if (emailCheck.length > 0) {
-      return res.status(200).json({
-        code: 401,
-        message: 'Email đã được đăng ký'
+      return res.status(400).json({
+        message: 'Email đã được đăng ký',
+        status: 'failed',
       });
     }
     const hashedPassword = await bcrypt.hash(password, 8);

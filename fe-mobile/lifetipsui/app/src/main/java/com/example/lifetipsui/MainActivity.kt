@@ -2,11 +2,13 @@ package com.example.lifetipsui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.lifetipsui.controller_ui.AddActivity
+import com.example.lifetipsui.controller_ui.NotificationActivity
 import com.example.lifetipsui.flagment.SettingsFragment
 import com.example.lifetipsui.flagment.HomeFragment
 import com.example.lifetipsui.flagment.ProfileFragment
@@ -16,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomNav: BottomNavigationView
+    private lateinit var notificationView : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         bottomNav = findViewById(R.id.bottomNav)
+        notificationView = findViewById(R.id.notificationscreen)
 
         // Load mặc định
         loadFragment(HomeFragment())
@@ -45,6 +49,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_profile -> loadFragment(ProfileFragment())
             }
             true
+        }
+
+        // Xử lý sự kiện click cho notificationView chuyển qua màn hình thông báo
+        notificationView.setOnClickListener {
+            // Chuyển hướng
+            val intent = Intent(this, NotificationActivity::class.java)
+            startActivity(intent)
         }
     }
 

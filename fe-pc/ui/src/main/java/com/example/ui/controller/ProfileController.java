@@ -248,21 +248,6 @@ public class ProfileController {
         }
     }
 
-    // public void updatePost(int postId, JSONObject body) {
-    // JSONObject response = PostService.updatePost(postId, body);
-    // if (response.getString("status").equals("success")) {
-    // Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    // alert.setTitle("Thông báo");
-    // alert.setHeaderText(null);
-    // alert.setContentText("Bài viết đã được cập nhật thành công.");
-    // alert.showAndWait();
-    // loadPostsScreen();
-    // } else {
-    // showErrorAlert("Lỗi khi cập nhật bài viết: " +
-    // response.getString("message"));
-    // }
-    // }
-
     public void updateUser() {
         JSONObject body = new JSONObject();
         body.put("fullName", fullName.getText());
@@ -285,7 +270,6 @@ public class ProfileController {
             Parent updatePostRoot = loader.load();
 
             PostDetailsController controller = loader.getController();
-//            controller.setPostIdUpdate(postId);
             controller.initData(postId);
 
             Stage stage = (Stage) postsContainer.getScene().getWindow();

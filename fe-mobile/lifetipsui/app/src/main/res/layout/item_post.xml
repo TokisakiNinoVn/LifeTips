@@ -71,11 +71,11 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
-            android:src="@drawable/ic_bookmark"
+            android:layout_marginEnd="76dp"
             android:contentDescription="Save"
-            app:layout_constraintTop_toBottomOf="@id/textUser"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:src="@drawable/ic_bookmark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textUser" />
 
         <ImageView
             android:id="@+id/btnViewDetails"
@@ -85,6 +85,17 @@
             android:layout_marginEnd="40dp"
             android:contentDescription="Save"
             android:src="@drawable/ic_rocket_launch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textUser" />
+
+        <ImageView
+            android:id="@+id/btnShare"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="Save"
+            android:src="@drawable/ic_share"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textUser" />
     </androidx.constraintlayout.widget.ConstraintLayout>

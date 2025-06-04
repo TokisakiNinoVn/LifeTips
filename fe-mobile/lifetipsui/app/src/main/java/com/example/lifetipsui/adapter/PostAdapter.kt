@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide
 import com.example.lifetipsui.R
 import com.example.lifetipsui.config.Config
 import com.example.lifetipsui.controller_ui.DetailActivity
-import com.example.lifetipsui.flagment.DetailsPost
 import com.example.lifetipsui.service.PostService
 import com.example.lifetipsui.model.Post
 import kotlinx.coroutines.CoroutineScope
@@ -24,6 +23,7 @@ import kotlinx.coroutines.launch
 import org.json.JSONObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+
 
 class PostAdapter(
     private val posts: MutableList<Post>,
@@ -38,6 +38,7 @@ class PostAdapter(
         val textCategory: TextView = itemView.findViewById(R.id.textCategory)
         val btnSave: ImageView = itemView.findViewById(R.id.btnSave)
         val btnViewDetails: ImageView = itemView.findViewById(R.id.btnViewDetails)
+        val btnShare: ImageView = itemView.findViewById(R.id.btnShare)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -92,6 +93,16 @@ class PostAdapter(
             }
         }
 
+        holder.btnShare.setOnClickListener {
+            val context = holder.itemView.context
+            val postId = post.id
+            val postUrl = "${Config.BASE_URL}/public/post/$postId"
+            val intent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, postUrl)
+            }
+            context.startActivity(Intent.createChooser(intent, "Chia sẻ bài viết"))
+        }
 
         holder.btnViewDetails.setOnClickListener {
             val context = holder.itemView.context
@@ -112,6 +123,13 @@ class PostAdapter(
     private fun reLinkImage(url: String): String {
         return url.replace("\\", "/")
             .replaceFirst("public/", "", ignoreCase = true)
+    }
+
+    // Bắt sự kiện khi người dùng nhấn vào nút chia sẻ - Kiểu copy cái link bài viết Config.BASE_URL + "/post/${post.id}"
+    fun setOnShareClickListener(onShareClick: (String) -> Unit) {
+        // This function can be used to set a click listener for sharing posts
+        // You can implement the logic to share the post link here
+        // For example, you can use an Intent to share the post link
     }
 }
 

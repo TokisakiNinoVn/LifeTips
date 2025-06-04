@@ -64,6 +64,7 @@
                     app:tint="@android:color/white" />
 
                 <ImageView
+                    android:id="@+id/notificationscreen"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginStart="16dp"
@@ -85,8 +86,6 @@
         app:layout_constraintTop_toBottomOf="@+id/topAppBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-
-
     </HorizontalScrollView>
 
     <FrameLayout
@@ -97,8 +96,6 @@
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
-
     <!-- RecyclerView for Posts -->
 
     <!-- Bottom Navigation -->
