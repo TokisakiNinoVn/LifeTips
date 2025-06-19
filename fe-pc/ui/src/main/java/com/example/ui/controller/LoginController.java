@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import com.example.ui.service.StorageService;
-import utils.FXRouter;
+import com.example.ui.utils.FXRouter;
 
 import java.io.IOException;
 

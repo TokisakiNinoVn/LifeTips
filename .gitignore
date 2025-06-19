@@ -1,1 +1,8 @@
 docs
+APP Mobile
+APP PC
+*.zip
+*.txt
+
+be/public/upploads
+be/public/upploads/*

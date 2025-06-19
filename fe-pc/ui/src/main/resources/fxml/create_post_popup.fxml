@@ -24,12 +24,6 @@
             <TextField fx:id="postTitle" prefWidth="500.0"/>
         </HBox>
 
-        <!-- Description -->
-        <HBox spacing="10.0" alignment="CENTER_LEFT">
-            <Label text="Description:" styleClass="form-label"/>
-            <TextField fx:id="postDescription" prefWidth="500.0"/>
-        </HBox>
-
         <!-- Categories -->
         <VBox spacing="5.0">
             <Label text="Categories:" styleClass="form-label"/>

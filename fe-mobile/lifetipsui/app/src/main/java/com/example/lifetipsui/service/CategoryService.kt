@@ -21,18 +21,3 @@ class CategoryService {
         }
     }
 }
-
-
-//class CategoryService {
-//    companion object {
-//        suspend fun getListCategoryService(): JSONObject? {
-//            return try {
-//                ApiMethodsPublic.get(CategoryApi.getListCategoryApi)
-//            } catch (e: Exception) {
-//                println(">> [CategoryService] Error calling getListCategoryService API: ${e.localizedMessage}")
-//                e.printStackTrace()
-//                null
-//            }
-//        }
-//    }
-//}

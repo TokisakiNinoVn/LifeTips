@@ -31,7 +31,7 @@ exports.login = async (req, res, next) => {
     const token = jwt.sign(
       { id: user.id, email: user.email },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: '48h' }
+      { expiresIn: '7d' }
     );
 
     // Optionally store user session (if required)
@@ -47,13 +47,8 @@ exports.login = async (req, res, next) => {
       data: {
         id: user.id,
         fullname: user.name,
-        // zalo: user.zalo,
-        // email: user.email,
-        // address: user.address,
-        // fbUrl: user.fbUrl,
         avatar: user.avatar,
         createdAt: user.createdAt,
-        // updatedAt: user.updatedAt,
       },
       message: 'Đăng nhập thành công',
     });

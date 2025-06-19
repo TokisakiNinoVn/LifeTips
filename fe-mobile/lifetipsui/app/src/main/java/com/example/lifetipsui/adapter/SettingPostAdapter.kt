@@ -50,8 +50,8 @@ class SettingPostAdapter(
         val post = posts[position]
         holder.textTitle.text = post.title ?: "Không có tiêu đề"
         holder.textContent.text = post.content ?: "Không có nội dung"
-        holder.textUser.text = post.user?.full_name?.let { "Tác giả: $it" } ?: "Tác giả không xác định"
-        holder.textCategory.text = post.category?.name?.let { "Chuyên mục: $it" } ?: "Không có chuyên mục"
+//        holder.textUser.text = post.user?.full_name?.let { "Tác giả: $it" } ?: "Tác giả không xác định"
+//        holder.textCategory.text = post.category?.name?.let { "Chuyên mục: $it" } ?: "Không có chuyên mục"
 
         val rawUrl = post.files.firstOrNull()?.url
         if (!rawUrl.isNullOrEmpty()) {

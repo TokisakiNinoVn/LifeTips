@@ -15,7 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.paint.Color;
 import java.io.IOException;
 
-import utils.FXRouter;
+import com.example.ui.utils.FXRouter;
 import com.example.ui.service.StorageService;
 
 public class HeaderController {

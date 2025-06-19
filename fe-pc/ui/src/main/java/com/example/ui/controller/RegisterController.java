@@ -6,7 +6,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import org.json.JSONObject;
-import utils.FXRouter;
+import com.example.ui.utils.FXRouter;
 import com.example.ui.service.AuthService;
 
 import java.io.IOException;

@@ -34,6 +34,16 @@ exports.addComment = async (req, res, next) => {
         return next(new AppError('Content and rate are required', HTTP_STATUS.BAD_REQUEST));
     }
 
+    // Kiểm tra xem bài đăng có tồn tại không
+    const [post] = await db.pool.execute('SELECT id FROM tips_post WHERE id = ?', [postId]);
+    if (post.length === 0) {
+        // return next(new AppError('Post not found', HTTP_STATUS.NOT_FOUND));
+        return res.status(HTTP_STATUS.NOT_FOUND).json({
+            status: "failed",
+            message: "Post not found"
+        });
+    }
+
     try {
         const [result] = await db.pool.execute(`
             INSERT INTO comments (user_id, tippost_id, content, rate)

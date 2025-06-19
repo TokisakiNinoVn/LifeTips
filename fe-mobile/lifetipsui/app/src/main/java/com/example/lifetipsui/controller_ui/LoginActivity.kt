@@ -3,6 +3,7 @@ package com.example.lifetipsui.controller_ui
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lifetipsui.R
@@ -24,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var passwordInput: TextInputEditText
     private lateinit var loginButton: Button
     private lateinit var toolbar: MaterialToolbar
+    private lateinit var toRegisterButton: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
         emailInput = findViewById(R.id.email_input)
         passwordInput = findViewById(R.id.password_input)
         loginButton = findViewById(R.id.login_button)
+        toRegisterButton = findViewById(R.id.register_link)
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -40,6 +43,11 @@ class LoginActivity : AppCompatActivity() {
 
         loginButton.setOnClickListener {
             login()
+        }
+
+        toRegisterButton.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
     }
 

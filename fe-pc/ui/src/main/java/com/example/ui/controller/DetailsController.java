@@ -101,6 +101,7 @@ public class DetailsController {
         try {
             JSONObject response = PostService.getPostById(postId);
             JSONObject post = response.getJSONObject("data");
+            System.out.println("Data post: " + post.toString());
 
             usernameLabel.setText("By " + post.getJSONObject("user").getString("full_name"));
             likesLabel.setText("♥ " + post.getInt("total_like"));
@@ -225,7 +226,7 @@ public class DetailsController {
             try {
                 // Giả sử avatar là URL hình ảnh
                 avatarView.setImage(
-                        new Image(constant.FILE_URL + "public\\avatars\\" + comment.getString("avatar") + ".png"));
+                        new Image(constant.FILE_URL + "\\avatars\\" + comment.getString("avatar") + ".png"));
             } catch (Exception e) {
                 avatarView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/images/img.png"))));
                 System.out.println("Avatar not found, using default image." + e);
@@ -234,19 +235,24 @@ public class DetailsController {
             avatarView.setFitWidth(30);
 
             Label userName = new Label(comment.getString("full_name"));
+            userName.setStyle("-fx-text-fill: black;");
+
             Label rating = new Label("⭐".repeat(comment.getInt("rate")));
+            rating.setStyle("-fx-text-fill: black;");
+
             userInfo.getChildren().addAll(avatarView, userName, rating);
 
-            // Nội dung bình luận
+// Nội dung bình luận
             Label content = new Label(comment.getString("content"));
-            content.setStyle("-fx-font-size: 14px; -fx-wrap-text: true;");
+            content.setStyle("-fx-font-size: 14px; -fx-wrap-text: true; -fx-text-fill: black;");
 
-            // Thời gian bình luận
+// Thời gian bình luận
             Label time = new Label(comment.getString("created_at"));
-            time.setStyle("-fx-font-size: 12px; -fx-text-fill: #666;");
+            time.setStyle("-fx-font-size: 12px; -fx-text-fill: black;");
 
             commentBox.getChildren().addAll(userInfo, content, time);
             commentList.getChildren().add(commentBox);
+
         }
     }
 

@@ -146,6 +146,17 @@ class PostService {
             }
         }
 
-
+        // Cập nhật bài viết
+        @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun updatePostService(postId: Int, body: JSONObject): JSONObject? {
+            return try {
+                val urlWithId = "${PostApi.updatePostApi}/$postId"
+                ApiMethodsPrivate.putRequest(urlWithId, body)
+            } catch (e: Exception) {
+                println(">> [PostService] Error calling updatePost API: ${e.localizedMessage}")
+                e.printStackTrace()
+                null
+            }
+        }
     }
 }

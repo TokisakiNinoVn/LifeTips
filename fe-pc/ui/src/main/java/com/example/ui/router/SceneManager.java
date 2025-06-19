@@ -1,6 +1,6 @@
 package com.example.ui.router;
 
-//package com.example.ui.utils;
+//package com.example.ui.com.example.ui.utils;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

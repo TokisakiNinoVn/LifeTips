@@ -20,7 +20,7 @@ exports.loginRequired = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, jwtSecret);
-    // console.log('Decoded token:', decoded);
+    // console.log('Token: ', token);
     if (!decoded.id) {
       return res.status(400).json({ message: 'Token không chứa user id' });
     }

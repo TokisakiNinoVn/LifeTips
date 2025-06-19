@@ -64,7 +64,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             logoutButton.visibility = View.VISIBLE
 
             logoutButton.setOnClickListener {
-                // Xử lý đăng xuất
                 performLogout()
             }
 
@@ -76,9 +75,17 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             displayNameInput.visibility = View.GONE
             updateFullNameButton.visibility = View.GONE
 
-            loginButton.setOnClickListener {
-                val intent = Intent(requireContext(), LoginActivity::class.java)
-                startActivity(intent)
+            try {
+                loginButton.setOnClickListener {
+                    context?.let {
+                        val intent = Intent(it, LoginActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(requireContext(), "Lỗi đăng nhập: ${e.message}", Toast.LENGTH_SHORT).show()
             }
 
             registerButton.setOnClickListener {

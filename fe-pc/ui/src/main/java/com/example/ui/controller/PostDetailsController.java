@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import utils.FXRouter;
+import com.example.ui.utils.FXRouter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
